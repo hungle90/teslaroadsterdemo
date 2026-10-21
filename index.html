@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--ARTIFACT_BEGIN-->
+<title>Roadster McGregor 15.10.2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: một cột dọc, sân khấu 3D chiếm trọn chiều ngang với bảng điều khiển bên phải (xuống dưới khi màn hình hẹp). */
+:root{
+  color-scheme: dark;
+  --bg:#05070e;
+  --bg-2:#080c16;
+  --panel:#0c111d;
+  --panel-2:#111829;
+  --line:#1c2435;
+  --fg:#e9eef8;
+  --muted:#8d99b0;
+  --accent:#e4202f;
+  --accent-soft:#3a0f16;
+  --cool:#35d6ff;
+  --cool-soft:#0a2130;
+  --warm:#ffcf63;
+  --font-display: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#05070e}
+img{max-width:100%}
+[hidden]{display:none !important}
+a{color:var(--cool)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:2px;border-radius:4px}
+
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+section{padding-block:clamp(44px,7vw,84px)}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h2{font-size:clamp(24px,3.4vw,38px);letter-spacing:-.02em;line-height:1.12;font-weight:700}
+h3{font-size:17px;letter-spacing:-.01em;font-weight:650}
+p{margin:0}
+.lead{color:var(--muted);max-width:62ch;margin-top:12px}
+
+/* ---------- Thanh điều hướng ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(5,7,14,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:14px;min-height:58px;padding-block:8px}
+.brand{font-family:var(--font-display);font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase;white-space:nowrap}
+.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;padding:7px 10px;border-radius:7px;white-space:nowrap}
+.nav-links a:hover{color:var(--fg);background:var(--panel-2)}
+
+/* ---------- Nút ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg);
+  padding:10px 14px;border-radius:9px;cursor:pointer;font-size:13.5px;font-weight:550;line-height:1.1;min-height:42px;transition:background .15s,border-color .15s,transform .1s}
+.btn:hover{background-color:#172034;border-color:#2a3650}
+.btn:active{transform:translateY(1px)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:#ffd9dc}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background-color:#f52b3a}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.42;cursor:not-allowed}
+.btn.sm{padding:7px 11px;min-height:36px;font-size:12.5px}
+
+/* ---------- Nhãn nguồn ---------- */
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.3}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.tag.event{color:#ff8d96}
+.tag.claim{color:var(--warm)}
+.tag.sim{color:var(--cool)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ---------- Màn hình mở đầu ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:
+  radial-gradient(900px 420px at 50% 112%, rgba(53,214,255,.10), transparent 70%),
+  radial-gradient(700px 320px at 12% -10%, rgba(228,32,47,.16), transparent 70%), var(--bg)}
+.hero-in{display:grid;gap:28px;align-items:center;padding-block:clamp(40px,6vw,76px)}
+@media(min-width:900px){.hero-in{grid-template-columns:1.05fr .95fr;gap:40px}}
+.hero h1{font-size:clamp(32px,6vw,62px);line-height:1.02;letter-spacing:-.035em;font-weight:800;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{margin-top:16px;color:var(--muted);font-size:clamp(15px,1.5vw,17px);max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.stageframe{position:relative;aspect-ratio:16/10;max-width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:
+  linear-gradient(180deg,#070b14,#0b1120 60%,#05070e)}
+.sweep{position:absolute;inset:-40% -10%;background:conic-gradient(from 0deg at 50% 100%, transparent 0deg, rgba(255,255,255,.085) 18deg, transparent 36deg);
+  animation:sweep 9s linear infinite;transform-origin:50% 100%}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.hero-car{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:78%}
+.floor-line{position:absolute;left:0;right:0;bottom:22%;height:1px;background:linear-gradient(90deg,transparent,rgba(53,214,255,.45),transparent)}
+.hero-note{position:absolute;left:14px;bottom:12px;font-family:var(--font-mono);font-size:10.5px;color:#5f6c84;letter-spacing:.06em}
+
+/* ---------- Sân khấu 3D ---------- */
+.stage{display:grid;gap:14px}
+@media(min-width:1000px){.stage{grid-template-columns:minmax(0,1fr) 330px}}
+.stage-view{position:relative;min-width:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#04060c;
+  aspect-ratio:16/9;max-height:70vh;min-height:300px}
+.stage-view canvas{display:block;width:100%;height:100%}
+#stageShell:fullscreen{background:var(--bg);width:100%;height:100%;padding:12px;grid-template-columns:minmax(0,1fr) 320px;align-content:stretch}
+#stageShell:fullscreen .stage-view{aspect-ratio:auto;height:100%;max-height:none}
+#stageShell:fullscreen .stage-side{overflow:auto}
+@media(max-width:999px){#stageShell:fullscreen{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}}
+
+.hud{position:absolute;inset:0;pointer-events:none}
+.hud > *{pointer-events:auto}
+.hud-top,.progress,.countdown,.pin{pointer-events:none}
+.hud-top .btn{pointer-events:auto}
+.hud-top{position:absolute;left:12px;top:12px;right:12px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.hud-card{background:rgba(8,12,22,.78);border:1px solid var(--line);border-radius:10px;padding:9px 11px;backdrop-filter:blur(6px);max-width:min(58%,420px)}
+.hud-stage-name{font-family:var(--font-display);font-weight:650;font-size:14px;letter-spacing:-.01em}
+.hud-step{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.hud-right{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.chip-mode{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cool);
+  border:1px solid rgba(53,214,255,.4);background:rgba(10,30,44,.7);padding:5px 9px;border-radius:999px}
+.narr{position:absolute;left:12px;bottom:46px;max-width:min(70%,460px);background:rgba(8,12,22,.84);border:1px solid var(--line);
+  border-left:2px solid var(--accent);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5;backdrop-filter:blur(6px)}
+.narr .tags{margin-top:8px}
+.countdown{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-size:clamp(70px,16vw,150px);
+  font-weight:800;letter-spacing:-.05em;color:#fff;text-shadow:0 0 50px rgba(53,214,255,.5);pointer-events:none}
+.progress{position:absolute;left:0;right:0;bottom:0;height:34px;display:flex;align-items:center;gap:10px;padding:0 12px;
+  background:linear-gradient(180deg,transparent,rgba(4,6,12,.9) 55%)}
+.bar{flex:1;height:4px;border-radius:999px;background:#1a2235;overflow:hidden;min-width:0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ff6a73);border-radius:999px}
+.pct{font-family:var(--font-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:42px;text-align:right}
+
+.pin{position:absolute;transform:translate(-50%,-50%);pointer-events:none}
+.pin .dot{width:9px;height:9px;border-radius:50%;background:var(--cool);box-shadow:0 0 0 4px rgba(53,214,255,.18)}
+.pin .txt{position:absolute;left:14px;top:-9px;white-space:nowrap;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:#cfe9f7;background:rgba(6,14,24,.85);border:1px solid rgba(53,214,255,.3);padding:3px 7px;border-radius:6px}
+.hot{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid rgba(53,214,255,.65);background:rgba(10,30,44,.8);color:var(--cool);display:grid;place-items:center;font-size:14px;line-height:1}
+.hot:hover{background:rgba(20,60,84,.95)}
+.hot[aria-pressed="true"]{background:var(--cool);color:#04121a;border-color:var(--cool)}
+.hot .ring{position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(53,214,255,.35);animation:ring 2.6s ease-out infinite}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+.hotcard{position:absolute;right:12px;bottom:46px;width:min(300px,78%);background:rgba(8,12,22,.9);border:1px solid var(--line);
+  border-radius:10px;padding:12px;backdrop-filter:blur(6px)}
+.hotcard h4{margin:0 0 6px;font-size:14px;font-family:var(--font-display)}
+.hotcard p{font-size:12.5px;color:#c3cde0;line-height:1.5}
+.hotcard .x{position:absolute;right:8px;top:8px;background:none;border:0;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:4px}
+
+.gauge{position:absolute;right:12px;bottom:46px;width:172px;background:rgba(8,12,22,.85);border:1px solid var(--line);border-radius:10px;padding:10px;backdrop-filter:blur(6px)}
+.gauge svg{display:block;width:100%;height:auto}
+.gauge .read{display:flex;align-items:baseline;gap:5px;justify-content:center;margin-top:-6px}
+.gauge .num{font-family:var(--font-display);font-size:26px;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.gauge .unit{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.gauge .accel{height:4px;border-radius:999px;background:#1a2235;overflow:hidden;margin-top:8px}
+.gauge .accel i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cool),#9af0ff)}
+.gauge figcaption{font-family:var(--font-mono);font-size:9.5px;color:#6a768c;letter-spacing:.06em;text-align:center;margin-top:7px;text-transform:uppercase}
+.lights{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
+.lights i{width:14px;height:14px;border-radius:50%;background:#20160f;border:1px solid #33241a}
+.lights i.on{background:#ff3b2f;border-color:#ff6a60;box-shadow:0 0 10px rgba(255,59,47,.7)}
+.lights i.go{background:#2bd97a;border-color:#6cf0a8;box-shadow:0 0 12px rgba(43,217,122,.75)}
+
+.fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;background:var(--panel)}
+.fallback div{max-width:46ch}
+
+/* ---------- Bảng điều khiển ---------- */
+.stage-side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:12px}
+.panel h3{font-size:11px;font-family:var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-weight:500}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:4px}
+.seg button{border:0;background:transparent;border-radius:6px;padding:7px 4px;font-size:12.5px;cursor:pointer;color:var(--muted);min-height:34px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.check{display:flex;align-items:center;gap:9px;font-size:13px;color:#c3cde0;cursor:pointer;padding:5px 0}
+.check input{width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.steps{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.step{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:8px 11px;cursor:pointer;text-align:left;min-width:150px}
+.step[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.step b{display:block;font-size:12.5px;font-weight:600}
+.step span{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- Các chặng / thẻ nội dung ---------- */
+.cards{display:grid;gap:12px;margin-top:26px}
+@media(min-width:680px){.cards{grid-template-columns:1fr 1fr}}
+@media(min-width:1020px){.cards.three{grid-template-columns:repeat(3,1fr)}}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .num{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.14em}
+.card p{font-size:13.5px;color:#bcc7da;line-height:1.55}
+.card .foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:4px}
+.facts{display:grid;gap:9px;margin-top:22px}
+.fact{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:12px 14px;flex-wrap:wrap}
+.fact p{font-size:13.5px;max-width:70ch}
+.spec{display:grid;gap:12px;margin-top:26px}
+@media(min-width:640px){.spec{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.spec{grid-template-columns:repeat(4,1fr)}}
+.spec .card{align-items:flex-start}
+.spec svg{width:28px;height:28px;color:var(--cool)}
+.spec .val{font-family:var(--font-display);font-size:22px;font-weight:750;letter-spacing:-.02em;line-height:1.15}
+.spec .lbl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.srcs{display:grid;gap:10px;margin-top:22px}
+@media(min-width:760px){.srcs{grid-template-columns:repeat(3,1fr)}}
+.src{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px;text-decoration:none;color:inherit;display:block}
+.src:hover{border-color:#2a3650;background:var(--panel-2)}
+.src b{display:block;font-size:14px}
+.src span{font-family:var(--font-mono);font-size:11px;color:var(--muted);word-break:break-all}
+.disclaimer{margin-top:18px;border:1px dashed #2a3650;border-radius:10px;padding:13px 15px;color:var(--muted);font-size:13px;background:rgba(12,17,29,.6)}
+footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:12.5px}
+.keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+kbd{font-family:var(--font-mono);font-size:11px;border:1px solid var(--line);background:var(--panel-2);border-radius:5px;padding:2px 6px;color:#c3cde0}
+/* ---------- Bộ chọn ngôn ngữ ---------- */
+.lang{position:relative;flex:0 0 auto}
+.langbtn{gap:6px;padding:7px 10px}
+.flag{font-size:15px;line-height:1}
+.caret{font-size:10px;color:var(--muted)}
+.langmenu{position:absolute;top:calc(100% + 7px);right:0;margin:0;padding:6px;list-style:none;min-width:176px;
+  background:var(--panel);border:1px solid var(--line);border-radius:11px;box-shadow:0 20px 44px rgba(0,0,0,.55);z-index:70}
+.langitem{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;white-space:nowrap}
+.langitem:hover{background:var(--panel-2)}
+.langitem[aria-selected="true"]{background:var(--accent-soft);color:#ffd9dc}
+.keytxt{color:var(--muted);font-size:11.5px}
+.subhead{font-size:15px;font-family:var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+@media(max-width:760px){#btnFullTop{display:none}}
+
+/* ---------- Bố cục phải-sang-trái (tiếng Ả Rập) ---------- */
+[dir="rtl"] .narr{left:auto;right:12px;border-left:0;border-right:2px solid var(--accent)}
+[dir="rtl"] .hotcard,[dir="rtl"] .gauge{right:auto;left:12px}
+[dir="rtl"] .pin .txt{left:14px;right:auto;transform:translateX(-100%)}
+[dir="rtl"] .langmenu{right:auto;left:0}
+[dir="rtl"] .eyebrow,[dir="rtl"] .hud-step,[dir="rtl"] .step span,[dir="rtl"] .spec .lbl,
+[dir="rtl"] .card .num,[dir="rtl"] .subhead,[dir="rtl"] .tag,[dir="rtl"] .brand{letter-spacing:0}
+[dir="rtl"] .hero-note,[dir="rtl"] .gauge figcaption{letter-spacing:0}
+
+@media (prefers-reduced-motion: reduce){
+  .sweep{animation:none}
+  .hot .ring{animation:none}
+  html{scroll-behavior:auto}
+}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+@media(max-width:620px){
+  .btn{min-height:46px;flex:1 1 auto}
+  .narr{max-width:calc(100% - 24px);font-size:12px;bottom:42px}
+  .gauge{width:140px}
+  .hud-card{max-width:62%}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="brand">TESLA <span>ROADSTER</span></div>
+    <nav class="nav-links" aria-label="Menu">
+      <a href="#mo-phong" data-i18n="nav.sim">Mô phỏng</a>
+      <a href="#chang" data-i18n="nav.stages">Các chặng trình diễn</a>
+      <a href="#cong-nghe" data-i18n="nav.tech">Công nghệ</a>
+      <a href="#thong-so" data-i18n="nav.specs">Thông số</a>
+      <a href="#nguon" data-i18n="nav.sources">Nguồn tham khảo</a>
+    </nav>
+    <div class="lang">
+      <button class="btn sm ghost langbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+        <span class="flag" id="langFlag" aria-hidden="true">🇻🇳</span><span id="langCode">VI</span>
+        <span class="caret" aria-hidden="true">▾</span>
+      </button>
+      <ul class="langmenu" id="langMenu" role="listbox" aria-label="Language" hidden></ul>
+    </div>
+    <button class="btn sm ghost" id="btnFullTop" aria-pressed="false" data-i18n="nav.full">Toàn màn hình</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="mo-dau">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow" data-i18n="hero.eyebrow">McGregor, Texas · 15.10.2026</p>
+      <h1 data-i18n-html="hero.title">Roadster — một màn trình diễn <em>vượt giới hạn</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Khám phá buổi trình diễn Tesla Roadster tại McGregor, Texas · 15.10.2026.</p>
+      <div class="hero-cta">
+        <button class="btn primary" id="btnStartSim" data-i18n="hero.cta1">Bắt đầu mô phỏng</button>
+        <a class="btn ghost" href="#chang" data-i18n="hero.cta2">Xem các chặng</a>
+      </div>
+      <div class="hero-meta">
+        <span class="tag event" data-i18n="tag.event">Được trình diễn tại sự kiện</span>
+        <span class="tag claim" data-i18n="tag.claim">Tesla công bố</span>
+        <span class="tag sim" data-i18n="tag.sim">Mô phỏng tương tác</span>
+      </div>
+    </div>
+    <div class="stageframe" aria-hidden="true">
+      <div class="sweep"></div>
+      <div class="floor-line"></div>
+      <svg class="hero-car" viewBox="0 0 520 170" role="img">
+        <defs>
+          <linearGradient id="hbody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f2f5fa"/><stop offset="1" stop-color="#8e99ab"/>
+          </linearGradient>
+        </defs>
+        <path d="M26 118 C52 92 96 84 142 80 C178 56 232 44 292 48 C352 52 400 68 432 86 C468 92 496 102 502 118 C504 126 496 130 486 130 L42 130 C30 130 22 126 26 118 Z" fill="url(#hbody)"/>
+        <path d="M168 78 C200 58 248 50 294 54 C338 58 374 70 398 84 L186 84 Z" fill="#0a1018" opacity=".92"/>
+        <rect x="486" y="100" width="18" height="7" rx="3" fill="#fff"/>
+        <rect x="22" y="100" width="16" height="7" rx="3" fill="#e4202f"/>
+        <circle cx="140" cy="130" r="30" fill="#0d1017"/><circle cx="140" cy="130" r="14" fill="#aab4c4"/>
+        <circle cx="398" cy="130" r="30" fill="#0d1017"/><circle cx="398" cy="130" r="14" fill="#aab4c4"/>
+        <rect x="20" y="86" width="40" height="5" rx="2" fill="#35d6ff" opacity=".8"/>
+      </svg>
+      <p class="hero-note" data-i18n="hero.note">PHÁC HỌA CÁCH ĐIỆU</p>
+    </div>
+  </div>
+</section>
+
+<section id="mo-phong">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="sim.eyebrow">Sân khấu mô phỏng</p>
+    <h2 data-i18n="sim.h2">Chạy lại buổi trình diễn, từng chặng một</h2>
+    <p class="lead" data-i18n="sim.lead">Hoạt ảnh được dựng bằng hình khối 3D cơ bản.</p>
+
+    <div class="stage" id="stageShell" style="margin-top:22px">
+      <div class="stage-view" id="stageView">
+        <canvas id="scene" role="img" aria-label="3D simulation stage"></canvas>
+
+        <div class="hud" id="hud">
+          <div class="hud-top">
+            <div class="hud-card">
+              <div class="hud-step" id="hudStep">1 / 6</div>
+              <div class="hud-stage-name" id="hudName"></div>
+            </div>
+            <div class="hud-right">
+              <span class="chip-mode" id="hudMode"></span>
+            </div>
+          </div>
+
+          <div class="countdown" id="countdown" hidden></div>
+
+          <div class="narr" id="narr">
+            <p id="narrText"></p>
+            <div class="tags" id="narrTags"></div>
+          </div>
+
+          <div class="hotcard" id="hotCard" hidden>
+            <button class="x" id="hotClose" aria-label="Close">✕</button>
+            <h4 id="hotTitle"></h4>
+            <p id="hotText"></p>
+            <div class="tags" id="hotTags" style="margin-top:8px"></div>
+          </div>
+
+          <figure class="gauge" id="gauge" hidden style="margin:0">
+            <div class="lights" id="startLights" aria-hidden="true"><i></i><i></i><i></i></div>
+            <svg viewBox="0 0 160 92" aria-hidden="true">
+              <path d="M14 84 A66 66 0 0 1 146 84" fill="none" stroke="#1a2235" stroke-width="9" stroke-linecap="round"/>
+              <path id="gaugeArc" d="M14 84 A66 66 0 0 1 146 84" fill="none" stroke="#35d6ff" stroke-width="9" stroke-linecap="round"
+                    stroke-dasharray="207" stroke-dashoffset="207"/>
+              <line id="gaugeNeedle" x1="80" y1="84" x2="20" y2="84" stroke="#e4202f" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="80" cy="84" r="5" fill="#e9eef8"/>
+            </svg>
+            <div class="read"><span class="num" id="gaugeNum">0</span><span class="unit">mph</span></div>
+            <div class="accel"><i id="gaugeBar"></i></div>
+            <figcaption id="gaugeCap"></figcaption>
+          </figure>
+
+          <div class="progress">
+            <div class="bar"><i id="progBar"></i></div>
+            <div class="pct" id="progPct">0%</div>
+          </div>
+        </div>
+
+        <div class="fallback" id="fallback" hidden>
+          <div>
+            <h3 style="margin-bottom:8px" id="fallbackTitle">Không hiển thị được sân khấu 3D</h3>
+            <p style="color:var(--muted);font-size:14px" id="fallbackText"></p>
+            <a class="btn ghost" href="#chang" style="margin-top:14px" id="fallbackLink">Xem mô tả các chặng</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="stage-side">
+        <div class="panel">
+          <h3 data-i18n="pan.program">Chương trình</h3>
+          <div class="grid2">
+            <button class="btn" id="btnPlayAll" data-i18n="pan.playAll">Phát toàn bộ</button>
+            <button class="btn" id="btnPause" data-i18n="pan.pause">Tạm dừng</button>
+            <button class="btn" id="btnResume" data-i18n="pan.resume">Tiếp tục</button>
+            <button class="btn" id="btnReplay" data-i18n="pan.replay">Phát lại chặng</button>
+          </div>
+          <div style="margin-top:7px"><button class="btn" id="btnReset" style="width:100%" data-i18n="pan.reset">Đặt lại</button></div>
+          <div style="margin-top:9px">
+            <h3 style="margin-bottom:6px" data-i18n="pan.speed">Tốc độ hoạt ảnh</h3>
+            <div class="seg" role="group">
+              <button id="spdSlow" aria-pressed="false" data-i18n="pan.slow">Chậm</button>
+              <button id="spdNormal" aria-pressed="true" data-i18n="pan.normal">Bình thường</button>
+              <button id="spdFast" aria-pressed="false" data-i18n="pan.fast">Nhanh</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 data-i18n="pan.display">Hiển thị</h3>
+          <label class="check"><input type="checkbox" id="tglJet" checked> <span data-i18n="pan.jet">Luồng khí</span></label>
+          <label class="check"><input type="checkbox" id="tglNarr" checked> <span data-i18n="pan.narrLabel">Lời dẫn trên màn hình</span></label>
+          <label class="check"><input type="checkbox" id="tglShake" checked> <span data-i18n="pan.shake">Rung camera khi tiếp đất</span></label>
+          <label class="check"><input type="checkbox" id="tglLabels" checked> <span data-i18n="pan.labels">Nhãn khám phá xe</span></label>
+          <label class="check"><input type="checkbox" id="tglSlow"> <span data-i18n="pan.slowmo">Chế độ mô phỏng chậm</span></label>
+        </div>
+
+        <div class="panel">
+          <h3 data-i18n="pan.camera">Góc nhìn</h3>
+          <div class="grid2">
+            <button class="btn sm" id="camWide" aria-pressed="true" data-i18n="pan.wide">Toàn cảnh</button>
+            <button class="btn sm" id="camSide" aria-pressed="false" data-i18n="pan.side">Góc ngang</button>
+            <button class="btn sm" id="camFollow" aria-pressed="false" data-i18n="pan.follow">Theo xe</button>
+            <button class="btn sm" id="camFree" aria-pressed="false" data-i18n="pan.free">Xoay tự do</button>
+          </div>
+          <div class="grid2" style="margin-top:7px">
+            <button class="btn sm ghost" id="camReset" data-i18n="pan.camReset">Góc mặc định</button>
+            <button class="btn sm ghost" id="btnFull" aria-pressed="false" data-i18n="nav.full">Toàn màn hình</button>
+          </div>
+          <p style="font-size:11.5px;color:var(--muted);margin-top:9px" data-i18n="pan.camHint">Kéo để xoay, cuộn để phóng to.</p>
+        </div>
+
+        <div class="panel">
+          <h3 data-i18n="pan.mode">Chế độ</h3>
+          <div class="grid2">
+            <button class="btn sm" id="btnExplore" aria-pressed="false" data-i18n="pan.explore">Chế độ khám phá</button>
+            <button class="btn sm" id="btnProgram" aria-pressed="true" data-i18n="pan.programMode">Chương trình</button>
+          </div>
+          <div style="margin-top:7px"><button class="btn sm ghost" id="btnReplayHop" style="width:100%" data-i18n="pan.replayHop">Xem lại cú bật</button></div>
+          <div style="margin-top:7px"><button class="btn sm ghost" id="btnRunLaunch" style="width:100%" data-i18n="pan.runLaunch">Chạy thử tăng tốc</button></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="steps" id="steps" role="group" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section id="chang" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="st.eyebrow">Sáu chặng</p>
+    <h2 data-i18n="st.h2">Diễn biến màn trình diễn</h2>
+    <p class="lead" data-i18n="st.lead">Mỗi chặng có thể xem riêng.</p>
+    <div class="cards three" id="stageCards"></div>
+    <h3 class="subhead" data-i18n="st.facts" style="margin-top:40px">Dữ kiện nền và nhãn nguồn</h3>
+    <div class="facts" id="factList"></div>
+  </div>
+</section>
+
+<section id="cong-nghe">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="tech.eyebrow">Công nghệ</p>
+    <h2 data-i18n="tech.h2">Những gì xuất hiện trong màn trình diễn</h2>
+    <p class="lead" data-i18n="tech.lead">Phần giải thích ngắn, giữ đúng mức thông tin đã được công bố.</p>
+    <div class="cards three" id="techCards"></div>
+  </div>
+</section>
+
+<section id="thong-so" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="spec.eyebrow">Thông số</p>
+    <h2 data-i18n="spec.h2">Các con số Tesla công bố</h2>
+    <p class="lead" data-i18n="spec.lead">Trang này không kiểm chứng độc lập các thông số.</p>
+    <div class="spec" id="specCards"></div>
+  </div>
+</section>
+
+<section id="nguon">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="src.eyebrow">Nguồn tham khảo</p>
+    <h2 data-i18n="src.h2">Kiểm chứng tại nguồn gốc</h2>
+    <div class="srcs">
+      <a class="src" href="https://livestream.tesla.com/?fy=2026" target="_blank" rel="noopener noreferrer">
+        <b>Livestream Tesla</b><span>livestream.tesla.com/?fy=2026</span>
+      </a>
+      <a class="src" href="https://www.tesla.com/roadster?lang=en" target="_blank" rel="noopener noreferrer">
+        <b>Tesla Roadster</b><span>tesla.com/roadster</span>
+      </a>
+      <a class="src" href="https://www.reuters.com/business/autos-transportation/tesla-set-unveil-next-generation-roadster-sports-ev-after-years-delay-2026-10-15/" target="_blank" rel="noopener noreferrer">
+        <b>Reuters</b><span>reuters.com</span>
+      </a>
+    </div>
+    <p class="disclaimer" data-i18n="src.disclaimer">Website là mô phỏng tương tác do người hâm mộ xây dựng, không phải sản phẩm chính thức của Tesla.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div data-i18n="foot.text">Mô phỏng tương tác · McGregor, Texas · 15.10.2026</div>
+    <div class="keys" id="keyList"></div>
+  </div>
+</footer>
+
+<script>
+/* ===== Dữ liệu đa ngôn ngữ / Multilingual strings ===== */
+window.LANGS = [
+  { c: "vi", f: "🇻🇳", n: "Tiếng Việt" },
+  { c: "en", f: "🇬🇧", n: "English" },
+  { c: "fr", f: "🇫🇷", n: "Français" },
+  { c: "de", f: "🇩🇪", n: "Deutsch" },
+  { c: "zh", f: "🇨🇳", n: "中文" },
+  { c: "ja", f: "🇯🇵", n: "日本語" },
+  { c: "ko", f: "🇰🇷", n: "한국어" },
+  { c: "ar", f: "🇸🇦", n: "العربية", dir: "rtl" }
+];
+window.I18N = {};
+
+I18N.vi = {
+  t: {
+    "nav.sim": "Mô phỏng", "nav.stages": "Các chặng trình diễn", "nav.tech": "Công nghệ",
+    "nav.specs": "Thông số", "nav.sources": "Nguồn tham khảo", "nav.full": "Toàn màn hình",
+    "tag.event": "Được trình diễn tại sự kiện", "tag.claim": "Tesla công bố", "tag.sim": "Mô phỏng tương tác",
+    "hero.eyebrow": "McGregor, Texas · 15.10.2026",
+    "hero.title": "Roadster — một màn trình diễn <em>vượt giới hạn</em>",
+    "hero.sub": "Khám phá buổi trình diễn Tesla Roadster tại McGregor, Texas · 15.10.2026. Sáu chặng, một sân khấu 3D, và nhãn nguồn rõ ràng cho từng dữ kiện.",
+    "hero.cta1": "Bắt đầu mô phỏng", "hero.cta2": "Xem các chặng", "hero.note": "PHÁC HỌA CÁCH ĐIỆU — KHÔNG PHẢI HÌNH ẢNH SẢN PHẨM",
+    "sim.eyebrow": "Sân khấu mô phỏng", "sim.h2": "Chạy lại buổi trình diễn, từng chặng một",
+    "sim.lead": "Hoạt ảnh được dựng bằng hình khối 3D cơ bản. Đây là mô phỏng trực quan lấy cảm hứng từ sự kiện, không tái tạo chính xác khí động học, hiệu năng hay cấu tạo của sản phẩm thương mại.",
+    "pan.program": "Chương trình", "pan.playAll": "Phát toàn bộ", "pan.pause": "Tạm dừng", "pan.resume": "Tiếp tục",
+    "pan.replay": "Phát lại chặng", "pan.reset": "Đặt lại", "pan.speed": "Tốc độ hoạt ảnh",
+    "pan.slow": "Chậm", "pan.normal": "Bình thường", "pan.fast": "Nhanh",
+    "pan.display": "Hiển thị", "pan.jet": "Luồng khí", "pan.narrLabel": "Lời dẫn trên màn hình",
+    "pan.shake": "Rung camera khi tiếp đất", "pan.labels": "Nhãn khám phá xe", "pan.slowmo": "Chế độ mô phỏng chậm (chặng 6)",
+    "pan.camera": "Góc nhìn", "pan.wide": "Toàn cảnh", "pan.side": "Góc ngang", "pan.follow": "Theo xe",
+    "pan.free": "Xoay tự do", "pan.camReset": "Góc mặc định",
+    "pan.camHint": "Kéo chuột hoặc vuốt để xoay. Cuộn chuột hoặc chụm hai ngón tay để phóng to.",
+    "pan.mode": "Chế độ", "pan.explore": "Chế độ khám phá", "pan.programMode": "Chương trình",
+    "pan.replayHop": "Xem lại cú bật", "pan.runLaunch": "Chạy thử tăng tốc",
+    "hud.step": "Chặng {n} / 6", "hud.modeProgram": "Chương trình trình diễn", "hud.modeExplore": "Chế độ khám phá",
+    "hud.gaugeCap": "Giá trị theo hoạt ảnh · Mô phỏng tương tác", "hud.close": "Đóng chú thích",
+    "pin.body": "Thân xe", "pin.cabin": "Khoang lái", "pin.under": "Gầm xe", "pin.rear": "Đuôi xe",
+    "st.eyebrow": "Sáu chặng", "st.h2": "Diễn biến màn trình diễn",
+    "st.lead": "Mỗi chặng có thể xem riêng. Nhãn bên dưới cho biết phần nào được trình diễn tại sự kiện, phần nào là thông tin Tesla công bố và phần nào do trang này mô phỏng.",
+    "st.facts": "Dữ kiện nền và nhãn nguồn", "st.view": "Xem chặng này", "st.stage": "CHẶNG {n}",
+    "tech.eyebrow": "Công nghệ", "tech.h2": "Những gì xuất hiện trong màn trình diễn",
+    "tech.lead": "Phần giải thích ngắn, giữ đúng mức thông tin đã được công bố. Trang này không bổ sung chi tiết cấu tạo chưa có nguồn xác nhận.",
+    "spec.eyebrow": "Thông số", "spec.h2": "Các con số Tesla công bố",
+    "spec.lead": "Toàn bộ thông số dưới đây là thông tin do Tesla công bố. Trang này không kiểm chứng độc lập và không trình bày chúng như kết quả đo của bên thứ ba.",
+    "src.eyebrow": "Nguồn tham khảo", "src.h2": "Kiểm chứng tại nguồn gốc",
+    "src.disclaimer": "Website là mô phỏng tương tác do người hâm mộ xây dựng, không phải sản phẩm chính thức của Tesla. Hoạt ảnh không tái tạo chính xác khí động học, hiệu năng hay cấu tạo sản phẩm thương mại.",
+    "foot.text": "Mô phỏng tương tác · McGregor, Texas · 15.10.2026 · Dựng bằng hình khối 3D cơ bản, không dùng hình ảnh hay mô hình tải từ bên ngoài.",
+    "key.space": "phát / tạm dừng", "key.stage": "chọn chặng", "key.reset": "đặt lại",
+    "key.explore": "khám phá", "key.cam": "góc mặc định", "key.full": "toàn màn hình",
+    "fb.title": "Không hiển thị được sân khấu 3D",
+    "fb.webgl": "Trình duyệt của bạn chưa bật WebGL nên không hiển thị được sân khấu 3D. Bạn vẫn có thể đọc đầy đủ phần mô tả các chặng, công nghệ và thông số ở bên dưới.",
+    "fb.lib": "Không tải được thư viện 3D (Three.js). Hãy kiểm tra kết nối mạng rồi tải lại trang. Toàn bộ nội dung chữ bên dưới vẫn đọc được bình thường.",
+    "fb.init": "Sân khấu 3D không khởi tạo được trên thiết bị này. Bạn vẫn có thể đọc đầy đủ phần mô tả các chặng, công nghệ và thông số ở bên dưới.",
+    "fb.link": "Xem mô tả các chặng"
+  },
+  stages: [
+    { n: "Đếm ngược khai màn", r: "Mở màn buổi trình diễn tại McGregor, Texas.", d: "Sân khấu tối dần, đèn chiếu quét về khu vực xe xuất hiện và bộ đếm 3–2–1 chạy trên màn hình." },
+    { n: "Roadster xuất hiện", r: "Roadster đi chậm vào giữa sân khấu. Bật nhãn khám phá xe để xem các khu vực chính.", d: "Xe vào sân khấu, đèn bật sáng, camera chuyển từ toàn cảnh sang góc ba phần tư phía trước." },
+    { n: "Hệ thống hút và đoạn dốc ngược", r: "Trong phần trình diễn, hệ thống hút ở gầm xe giúp xe bám vào đoạn dốc ngược. Hình học đoạn dốc trên trang được cách điệu.", d: "Xe tiến vào đoạn dốc cong, các quạt hút dưới gầm sáng xanh cyan và xe đi qua khoảnh khắc chạy ngược." },
+    { n: "Cú bật và thao tác thruster", r: "Mô phỏng chuyển động trên không dựa trên phần trình diễn; hoạt ảnh không phải mô hình vật lý chính xác.", d: "Xe tăng tốc đến điểm bật, các đầu phun ở bốn góc bánh xe thổi xuống mặt đường, xe rời mặt đất trong thời gian ngắn, xoay trên không và vượt qua xe tải cùng các xe mốc." },
+    { n: "Tiếp đất", r: "Xe giảm độ cao, tiếp đất trên đường thử rồi chạy thêm một đoạn ngắn và dừng lại.", d: "Khoảnh khắc chạm đường thử, kèm hiệu ứng rung camera nhẹ có thể tắt trong bảng Hiển thị." },
+    { n: "Mô phỏng tăng tốc", r: "Tesla cho biết Roadster có thể đạt 0–60 mph trong dưới một giây. Thời gian hoạt ảnh trên trang đã được điều chỉnh để người xem quan sát.", d: "Xe về vạch xuất phát, đèn xuất phát đổi màu, đồng hồ tốc độ và thanh tăng tốc chạy theo hoạt ảnh." }
+  ],
+  facts: [
+    "Buổi trình diễn diễn ra ngày 15/10/2026 tại cơ sở thử nghiệm SpaceX ở McGregor, Texas.",
+    "Roadster chạy trên một đoạn dốc ngược bằng hệ thống hút ở gầm xe.",
+    "Xe thực hiện cú bật và thao tác xoay trên không bằng thrusters, sau đó tiếp đất.",
+    "Roadster được trình diễn khi vượt qua một xe tải và các xe khác.",
+    "Tesla cho biết xe có thể tăng tốc từ 0 lên 60 mph trong dưới một giây.",
+    "Tesla nêu tốc độ tối đa trên 230 mph và phạm vi di chuyển trên 300 dặm mỗi lần sạc.",
+    "Tesla cho biết dự kiến bắt đầu sản xuất vào năm 2028.",
+    "Đoạn dốc, luồng khí và chuyển động trên trang này được dựng lại bằng hình khối 3D cơ bản."
+  ],
+  tech: [
+    { t: "Hệ thống hút và đoạn dốc ngược", d: "Trong phần trình diễn, hệ thống hút ở gầm xe giúp xe bám vào đoạn dốc ngược. Thông số lực hút và cấu tạo chi tiết chưa được công bố đầy đủ." },
+    { t: "Thruster và cú bật", d: "Xe thực hiện cú bật và thao tác xoay trên không bằng thrusters, sau đó tiếp đất. Trên mô hình, luồng phun hướng xuống ở bốn góc bánh xe là cách điệu để thấy hướng lực nâng." },
+    { t: "Vượt qua xe tải và các xe khác", d: "Roadster được trình diễn khi vượt qua một xe tải và các xe khác. Trên sân khấu 3D, các xe này được đặt làm vật mốc để người xem ước lượng khoảng cách." },
+    { t: "Tăng tốc", d: "Tesla cho biết xe có thể tăng tốc từ 0 lên 60 mph trong dưới một giây. Con số này chưa được kiểm chứng độc lập trên trang này." },
+    { t: "Mô hình 3D trên trang", d: "Chiếc xe, đoạn dốc và luồng khí đều được dựng từ hình khối cơ bản của thư viện 3D. Hình dáng và chuyển động đã được cách điệu để dễ quan sát." },
+    { t: "Thời gian hoạt ảnh", d: "Thời lượng từng chặng trên trang được kéo dài để người xem kịp quan sát. Không dùng thời gian hoạt ảnh của trang như kết quả đo thực tế." }
+  ],
+  specs: [
+    { l: "Tăng tốc", v: "0–60 mph trong dưới 1 giây" },
+    { l: "Tốc độ tối đa", v: "Trên 230 mph" },
+    { l: "Phạm vi di chuyển", v: "Trên 300 dặm mỗi lần sạc" },
+    { l: "Sản xuất", v: "Tesla cho biết dự kiến bắt đầu năm 2028" }
+  ],
+  hot: [
+    { t: "Hệ thống hút dưới gầm", d: "Trong màn trình diễn, phần gầm xe tạo lực hút giúp xe bám vào đoạn dốc ngược. Thông số lực hút chưa được công bố đầy đủ." },
+    { t: "Các đầu thruster", d: "Thruster được dùng cho cú bật và thao tác xoay trên không trong màn trình diễn. Đây là các thao tác ngắn, không phải chuyến bay bền vững." },
+    { t: "Đầu phun nâng ở bốn góc", d: "Trong màn trình diễn, xe rời mặt đất bằng thrusters. Trên mô hình này, luồng phun hướng xuống được đặt ở bốn góc bánh xe để thấy rõ hướng lực nâng; vị trí và hình dạng đầu phun là cách điệu." },
+    { t: "Bánh xe", d: "Bánh xe thể thao với vành sáng màu. Tỷ lệ bánh và vành trên mô hình đã được cách điệu cho dễ quan sát." },
+    { t: "Thân xe và thiết kế khí động học", d: "Thân xe thấp, thuôn dài, khoang kính tối màu và cánh gió phía sau. Các chi tiết khí động học ở đây chỉ mang tính minh họa." }
+  ]
+};
+
+I18N.en = {
+  t: {
+    "nav.sim": "Simulation", "nav.stages": "Show stages", "nav.tech": "Technology",
+    "nav.specs": "Specifications", "nav.sources": "Sources", "nav.full": "Fullscreen",
+    "tag.event": "Demonstrated at the event", "tag.claim": "Stated by Tesla", "tag.sim": "Interactive simulation",
+    "hero.eyebrow": "McGregor, Texas · 15 Oct 2026",
+    "hero.title": "Roadster — a demonstration <em>beyond the limit</em>",
+    "hero.sub": "Explore the Tesla Roadster demonstration at McGregor, Texas · 15 Oct 2026. Six stages, one 3D stage set, and a clear source label on every fact.",
+    "hero.cta1": "Start the simulation", "hero.cta2": "See the stages", "hero.note": "STYLISED SKETCH — NOT A PRODUCT IMAGE",
+    "sim.eyebrow": "Simulation stage", "sim.h2": "Replay the demonstration, one stage at a time",
+    "sim.lead": "The animation is built from basic 3D shapes. It is a visual simulation inspired by the event and does not reproduce the aerodynamics, performance or construction of a commercial product.",
+    "pan.program": "Programme", "pan.playAll": "Play all", "pan.pause": "Pause", "pan.resume": "Resume",
+    "pan.replay": "Replay stage", "pan.reset": "Reset", "pan.speed": "Animation speed",
+    "pan.slow": "Slow", "pan.normal": "Normal", "pan.fast": "Fast",
+    "pan.display": "Display", "pan.jet": "Exhaust plumes", "pan.narrLabel": "On-screen narration",
+    "pan.shake": "Camera shake on landing", "pan.labels": "Explore-the-car labels", "pan.slowmo": "Slow-motion mode (stage 6)",
+    "pan.camera": "Camera", "pan.wide": "Wide shot", "pan.side": "Side view", "pan.follow": "Follow the car",
+    "pan.free": "Free orbit", "pan.camReset": "Default angle",
+    "pan.camHint": "Drag or swipe to rotate. Scroll or pinch to zoom.",
+    "pan.mode": "Mode", "pan.explore": "Explore mode", "pan.programMode": "Programme",
+    "pan.replayHop": "Replay the hop", "pan.runLaunch": "Run the acceleration test",
+    "hud.step": "Stage {n} / 6", "hud.modeProgram": "Show programme", "hud.modeExplore": "Explore mode",
+    "hud.gaugeCap": "Animation value · Interactive simulation", "hud.close": "Close note",
+    "pin.body": "Body", "pin.cabin": "Cabin", "pin.under": "Underbody", "pin.rear": "Rear",
+    "st.eyebrow": "Six stages", "st.h2": "How the demonstration unfolded",
+    "st.lead": "Each stage can be viewed on its own. The labels below show what was demonstrated at the event, what Tesla stated, and what this page simulates.",
+    "st.facts": "Background facts and source labels", "st.view": "View this stage", "st.stage": "STAGE {n}",
+    "tech.eyebrow": "Technology", "tech.h2": "What appeared in the demonstration",
+    "tech.lead": "Short explanations that stay at the level of what has been published. This page adds no construction details without a confirmed source.",
+    "spec.eyebrow": "Specifications", "spec.h2": "The figures Tesla stated",
+    "spec.lead": "Every figure below is information published by Tesla. This page does not verify them independently and does not present them as third-party measurements.",
+    "src.eyebrow": "Sources", "src.h2": "Check it at the source",
+    "src.disclaimer": "This website is a fan-built interactive simulation, not an official Tesla product. The animation does not accurately reproduce the aerodynamics, performance or construction of a commercial product.",
+    "foot.text": "Interactive simulation · McGregor, Texas · 15 Oct 2026 · Built from basic 3D shapes, with no images or models loaded from outside.",
+    "key.space": "play / pause", "key.stage": "select a stage", "key.reset": "reset",
+    "key.explore": "explore", "key.cam": "default angle", "key.full": "fullscreen",
+    "fb.title": "The 3D stage cannot be shown",
+    "fb.webgl": "Your browser does not have WebGL enabled, so the 3D stage cannot be displayed. You can still read the full description of the stages, technology and specifications below.",
+    "fb.lib": "The 3D library (Three.js) could not be loaded. Check your connection and reload the page. All the text below still reads normally.",
+    "fb.init": "The 3D stage could not start on this device. You can still read the full description of the stages, technology and specifications below.",
+    "fb.link": "Read the stage descriptions"
+  },
+  stages: [
+    { n: "Opening countdown", r: "The demonstration opens at McGregor, Texas.", d: "The stage dims, a beam sweeps towards the spot where the car appears, and a 3–2–1 countdown runs on screen." },
+    { n: "The Roadster appears", r: "The Roadster rolls slowly to the centre of the stage. Turn on the explore labels to see the main areas.", d: "The car enters, its lights come on, and the camera moves from a wide shot to a three-quarter front angle." },
+    { n: "Suction system and inverted ramp", r: "During the demonstration, the suction system under the car holds it against the inverted ramp. The ramp geometry on this page is stylised.", d: "The car enters the curved ramp, the underbody fans glow cyan, and it passes through the inverted moment." },
+    { n: "The hop and thruster manoeuvre", r: "The airborne motion is simulated from the demonstration; the animation is not an accurate physics model.", d: "The car accelerates to the take-off point, the nozzles at the four wheel corners blow down onto the track, the car leaves the ground briefly, rotates in the air and clears the truck and the marker cars." },
+    { n: "Landing", r: "The car loses height, touches down on the test track, rolls a short distance and stops.", d: "The moment of touchdown, with a light camera shake that can be switched off in the Display panel." },
+    { n: "Acceleration simulation", r: "Tesla states the Roadster can reach 0–60 mph in under one second. The animation timing on this page has been stretched so viewers can follow it.", d: "The car returns to the start line, the start lights change colour, and the speedometer and acceleration bar follow the animation." }
+  ],
+  facts: [
+    "The demonstration took place on 15 October 2026 at the SpaceX test facility in McGregor, Texas.",
+    "The Roadster drove along an inverted ramp using a suction system under the car.",
+    "The car performed a hop and an aerial rotation using thrusters, then landed.",
+    "The Roadster was demonstrated clearing a truck and other vehicles.",
+    "Tesla states the car can accelerate from 0 to 60 mph in under one second.",
+    "Tesla gives a top speed above 230 mph and a range above 300 miles per charge.",
+    "Tesla states that production is expected to begin in 2028.",
+    "The ramp, the plumes and the motion on this page are rebuilt from basic 3D shapes."
+  ],
+  tech: [
+    { t: "Suction system and inverted ramp", d: "During the demonstration, the suction system under the car holds it against the inverted ramp. The suction figures and detailed construction have not been fully published." },
+    { t: "Thrusters and the hop", d: "The car performed a hop and an aerial rotation using thrusters, then landed. On this model, the downward plumes at the four wheel corners are stylised to show the direction of lift." },
+    { t: "Clearing a truck and other vehicles", d: "The Roadster was demonstrated clearing a truck and other vehicles. On the 3D stage these vehicles serve as markers for judging distance." },
+    { t: "Acceleration", d: "Tesla states the car can accelerate from 0 to 60 mph in under one second. That figure is not independently verified on this page." },
+    { t: "The 3D model on this page", d: "The car, the ramp and the plumes are all built from basic shapes in the 3D library. Shapes and motion have been stylised for clarity." },
+    { t: "Animation timing", d: "Each stage has been stretched so viewers can follow it. Do not read the animation timing on this page as a measured result." }
+  ],
+  specs: [
+    { l: "Acceleration", v: "0–60 mph in under 1 second" },
+    { l: "Top speed", v: "Above 230 mph" },
+    { l: "Range", v: "Above 300 miles per charge" },
+    { l: "Production", v: "Tesla states it is expected to begin in 2028" }
+  ],
+  hot: [
+    { t: "Underbody suction system", d: "During the demonstration, the underbody generates suction that holds the car against the inverted ramp. The suction figures have not been fully published." },
+    { t: "Thruster nozzles", d: "The thrusters were used for the hop and the aerial rotation in the demonstration. These are brief manoeuvres, not sustained flight." },
+    { t: "Lift nozzles at the four corners", d: "In the demonstration the car leaves the ground on thrusters. On this model the downward plumes sit at the four wheel corners to show the direction of lift; their position and shape are stylised." },
+    { t: "Wheels", d: "Sports wheels with bright rims. The proportions of tyre and rim on this model are stylised for clarity." },
+    { t: "Body and aerodynamics", d: "A low, elongated body, a dark glass cabin and a rear wing. The aerodynamic details here are illustrative only." }
+  ]
+};
+
+I18N.fr = {
+  t: {
+    "nav.sim": "Simulation", "nav.stages": "Étapes de la démonstration", "nav.tech": "Technologie",
+    "nav.specs": "Caractéristiques", "nav.sources": "Sources", "nav.full": "Plein écran",
+    "tag.event": "Démontré lors de l'événement", "tag.claim": "Annoncé par Tesla", "tag.sim": "Simulation interactive",
+    "hero.eyebrow": "McGregor, Texas · 15.10.2026",
+    "hero.title": "Roadster — une démonstration <em>hors limites</em>",
+    "hero.sub": "Explorez la démonstration de la Tesla Roadster à McGregor, au Texas · 15.10.2026. Six étapes, une scène 3D et une étiquette de source sur chaque information.",
+    "hero.cta1": "Lancer la simulation", "hero.cta2": "Voir les étapes", "hero.note": "CROQUIS STYLISÉ — PAS UNE IMAGE DU PRODUIT",
+    "sim.eyebrow": "Scène de simulation", "sim.h2": "Revivez la démonstration, étape par étape",
+    "sim.lead": "L'animation est construite à partir de formes 3D simples. C'est une simulation visuelle inspirée de l'événement, qui ne reproduit pas l'aérodynamique, les performances ni la construction d'un produit commercial.",
+    "pan.program": "Programme", "pan.playAll": "Tout lire", "pan.pause": "Pause", "pan.resume": "Reprendre",
+    "pan.replay": "Rejouer l'étape", "pan.reset": "Réinitialiser", "pan.speed": "Vitesse d'animation",
+    "pan.slow": "Lente", "pan.normal": "Normale", "pan.fast": "Rapide",
+    "pan.display": "Affichage", "pan.jet": "Jets de propulsion", "pan.narrLabel": "Commentaire à l'écran",
+    "pan.shake": "Secousse de caméra à l'atterrissage", "pan.labels": "Étiquettes d'exploration", "pan.slowmo": "Mode ralenti (étape 6)",
+    "pan.camera": "Caméra", "pan.wide": "Vue large", "pan.side": "Vue latérale", "pan.follow": "Suivre la voiture",
+    "pan.free": "Orbite libre", "pan.camReset": "Angle par défaut",
+    "pan.camHint": "Faites glisser pour pivoter. Molette ou pincement pour zoomer.",
+    "pan.mode": "Mode", "pan.explore": "Mode exploration", "pan.programMode": "Programme",
+    "pan.replayHop": "Revoir le saut", "pan.runLaunch": "Lancer le test d'accélération",
+    "hud.step": "Étape {n} / 6", "hud.modeProgram": "Programme de démonstration", "hud.modeExplore": "Mode exploration",
+    "hud.gaugeCap": "Valeur d'animation · Simulation interactive", "hud.close": "Fermer la note",
+    "pin.body": "Carrosserie", "pin.cabin": "Habitacle", "pin.under": "Soubassement", "pin.rear": "Arrière",
+    "st.eyebrow": "Six étapes", "st.h2": "Le déroulé de la démonstration",
+    "st.lead": "Chaque étape peut être vue séparément. Les étiquettes indiquent ce qui a été démontré lors de l'événement, ce qui vient de Tesla et ce que cette page simule.",
+    "st.facts": "Faits de référence et étiquettes de source", "st.view": "Voir cette étape", "st.stage": "ÉTAPE {n}",
+    "tech.eyebrow": "Technologie", "tech.h2": "Ce qui est apparu dans la démonstration",
+    "tech.lead": "Des explications courtes, limitées à ce qui a été publié. Cette page n'ajoute aucun détail de construction sans source confirmée.",
+    "spec.eyebrow": "Caractéristiques", "spec.h2": "Les chiffres annoncés par Tesla",
+    "spec.lead": "Tous les chiffres ci-dessous proviennent de Tesla. Cette page ne les vérifie pas de façon indépendante et ne les présente pas comme des mesures effectuées par un tiers.",
+    "src.eyebrow": "Sources", "src.h2": "Vérifier à la source",
+    "src.disclaimer": "Ce site est une simulation interactive réalisée par un passionné, et non un produit officiel de Tesla. L'animation ne reproduit pas fidèlement l'aérodynamique, les performances ni la construction d'un produit commercial.",
+    "foot.text": "Simulation interactive · McGregor, Texas · 15.10.2026 · Construite à partir de formes 3D simples, sans image ni modèle chargé de l'extérieur.",
+    "key.space": "lecture / pause", "key.stage": "choisir une étape", "key.reset": "réinitialiser",
+    "key.explore": "exploration", "key.cam": "angle par défaut", "key.full": "plein écran",
+    "fb.title": "La scène 3D ne peut pas s'afficher",
+    "fb.webgl": "WebGL n'est pas activé dans votre navigateur, la scène 3D ne peut donc pas s'afficher. Vous pouvez toujours lire l'intégralité des descriptions ci-dessous.",
+    "fb.lib": "La bibliothèque 3D (Three.js) n'a pas pu être chargée. Vérifiez votre connexion et rechargez la page. Tout le texte ci-dessous reste lisible.",
+    "fb.init": "La scène 3D n'a pas pu démarrer sur cet appareil. Vous pouvez toujours lire l'intégralité des descriptions ci-dessous.",
+    "fb.link": "Lire la description des étapes"
+  },
+  stages: [
+    { n: "Compte à rebours d'ouverture", r: "La démonstration s'ouvre à McGregor, au Texas.", d: "La scène s'assombrit, un faisceau balaie l'endroit où la voiture apparaît et un compte à rebours 3–2–1 défile à l'écran." },
+    { n: "La Roadster entre en scène", r: "La Roadster avance lentement vers le centre de la scène. Activez les étiquettes d'exploration pour voir les zones principales.", d: "La voiture entre, ses feux s'allument et la caméra passe d'une vue large à un trois-quarts avant." },
+    { n: "Système d'aspiration et rampe inversée", r: "Pendant la démonstration, le système d'aspiration sous la voiture la maintient contre la rampe inversée. La géométrie de la rampe est stylisée sur cette page.", d: "La voiture aborde la rampe courbe, les ventilateurs du soubassement s'illuminent en cyan et elle traverse le moment à l'envers." },
+    { n: "Le saut et la manœuvre des propulseurs", r: "Le mouvement aérien est simulé d'après la démonstration ; l'animation n'est pas un modèle physique exact.", d: "La voiture accélère jusqu au point de décollage, les buses aux quatre roues soufflent vers la piste, la voiture quitte brièvement le sol, pivote en l'air et franchit le camion et les véhicules repères." },
+    { n: "Atterrissage", r: "La voiture perd de l'altitude, se pose sur la piste d'essai, roule un court instant puis s'arrête.", d: "Le moment du contact, avec une légère secousse de caméra désactivable dans le panneau Affichage." },
+    { n: "Simulation d'accélération", r: "Tesla annonce que la Roadster peut atteindre 0–60 mph en moins d'une seconde. La durée de l'animation a été allongée pour rester lisible.", d: "La voiture revient sur la ligne de départ, les feux changent de couleur, et le compteur et la barre d'accélération suivent l'animation." }
+  ],
+  facts: [
+    "La démonstration a eu lieu le 15 octobre 2026 au centre d'essais SpaceX de McGregor, au Texas.",
+    "La Roadster a roulé sur une rampe inversée grâce à un système d'aspiration sous la voiture.",
+    "La voiture a effectué un saut et une rotation en l'air à l'aide de propulseurs, puis s'est posée.",
+    "La Roadster a été montrée franchissant un camion et d'autres véhicules.",
+    "Tesla annonce une accélération de 0 à 60 mph en moins d'une seconde.",
+    "Tesla indique une vitesse de pointe supérieure à 230 mph et une autonomie supérieure à 300 miles par charge.",
+    "Tesla annonce un début de production prévu en 2028.",
+    "La rampe, les jets et les mouvements de cette page sont reconstitués à partir de formes 3D simples."
+  ],
+  tech: [
+    { t: "Système d'aspiration et rampe inversée", d: "Pendant la démonstration, le système d'aspiration sous la voiture la maintient contre la rampe inversée. Les valeurs d'aspiration et la construction détaillée n'ont pas été entièrement publiées." },
+    { t: "Propulseurs et saut", d: "La voiture a effectué un saut et une rotation en l'air à l'aide de propulseurs, puis s'est posée. Sur ce modèle, les jets dirigés vers le bas aux quatre roues sont stylisés pour montrer la direction de la poussée." },
+    { t: "Franchir un camion et d'autres véhicules", d: "La Roadster a été montrée franchissant un camion et d'autres véhicules. Sur la scène 3D, ces véhicules servent de repères de distance." },
+    { t: "Accélération", d: "Tesla annonce une accélération de 0 à 60 mph en moins d'une seconde. Ce chiffre n'est pas vérifié de façon indépendante sur cette page." },
+    { t: "Le modèle 3D de cette page", d: "La voiture, la rampe et les jets sont tous construits à partir de formes simples de la bibliothèque 3D. Les formes et les mouvements ont été stylisés pour rester lisibles." },
+    { t: "Durée de l'animation", d: "Chaque étape a été allongée pour rester observable. Ne lisez pas la durée de l'animation comme un résultat mesuré." }
+  ],
+  specs: [
+    { l: "Accélération", v: "0–60 mph en moins d 1 seconde" },
+    { l: "Vitesse de pointe", v: "Plus de 230 mph" },
+    { l: "Autonomie", v: "Plus de 300 miles par charge" },
+    { l: "Production", v: "Tesla annonce un début prévu en 2028" }
+  ],
+  hot: [
+    { t: "Système d'aspiration sous la voiture", d: "Pendant la démonstration, le soubassement génère l'aspiration qui maintient la voiture contre la rampe inversée. Les valeurs d'aspiration n'ont pas été entièrement publiées." },
+    { t: "Buses des propulseurs", d: "Les propulseurs ont servi au saut et à la rotation en l'air pendant la démonstration. Ce sont de brèves manœuvres, pas un vol soutenu." },
+    { t: "Buses de sustentation aux quatre coins", d: "Lors de la démonstration, la voiture quitte le sol grâce aux propulseurs. Sur ce modèle, les jets vers le bas sont placés aux quatre roues pour montrer la direction de la poussée ; leur position et leur forme sont stylisées." },
+    { t: "Roues", d: "Des roues sportives à jantes claires. Les proportions du pneu et de la jante sont stylisées pour rester lisibles." },
+    { t: "Carrosserie et aérodynamique", d: "Une carrosserie basse et allongée, un habitacle vitré sombre et un aileron arrière. Les détails aérodynamiques ne sont ici qu'illustratifs." }
+  ]
+};
+
+I18N.de = {
+  t: {
+    "nav.sim": "Simulation", "nav.stages": "Phasen der Vorführung", "nav.tech": "Technik",
+    "nav.specs": "Technische Daten", "nav.sources": "Quellen", "nav.full": "Vollbild",
+    "tag.event": "Bei der Veranstaltung gezeigt", "tag.claim": "Angabe von Tesla", "tag.sim": "Interaktive Simulation",
+    "hero.eyebrow": "McGregor, Texas · 15.10.2026",
+    "hero.title": "Roadster — eine Vorführung <em>jenseits der Grenze</em>",
+    "hero.sub": "Erkunden Sie die Tesla-Roadster-Vorführung in McGregor, Texas · 15.10.2026. Sechs Phasen, eine 3D-Bühne und zu jeder Angabe eine klare Quellenkennzeichnung.",
+    "hero.cta1": "Simulation starten", "hero.cta2": "Phasen ansehen", "hero.note": "STILISIERTE SKIZZE — KEIN PRODUKTBILD",
+    "sim.eyebrow": "Simulationsbühne", "sim.h2": "Die Vorführung Phase für Phase nachspielen",
+    "sim.lead": "Die Animation besteht aus einfachen 3D-Formen. Sie ist eine visuelle Simulation nach dem Vorbild der Veranstaltung und gibt weder Aerodynamik noch Leistung oder Aufbau eines Serienprodukts wieder.",
+    "pan.program": "Programm", "pan.playAll": "Alles abspielen", "pan.pause": "Pause", "pan.resume": "Fortsetzen",
+    "pan.replay": "Phase wiederholen", "pan.reset": "Zurücksetzen", "pan.speed": "Animationstempo",
+    "pan.slow": "Langsam", "pan.normal": "Normal", "pan.fast": "Schnell",
+    "pan.display": "Anzeige", "pan.jet": "Schubstrahlen", "pan.narrLabel": "Einblendungen",
+    "pan.shake": "Kamerawackeln bei der Landung", "pan.labels": "Erkundungs-Beschriftungen", "pan.slowmo": "Zeitlupe (Phase 6)",
+    "pan.camera": "Kamera", "pan.wide": "Totale", "pan.side": "Seitenansicht", "pan.follow": "Dem Auto folgen",
+    "pan.free": "Freie Umlaufbahn", "pan.camReset": "Standardwinkel",
+    "pan.camHint": "Ziehen oder wischen zum Drehen. Scrollen oder zwei Finger zum Zoomen.",
+    "pan.mode": "Modus", "pan.explore": "Erkundungsmodus", "pan.programMode": "Programm",
+    "pan.replayHop": "Sprung noch einmal ansehen", "pan.runLaunch": "Beschleunigungstest starten",
+    "hud.step": "Phase {n} / 6", "hud.modeProgram": "Vorführungsprogramm", "hud.modeExplore": "Erkundungsmodus",
+    "hud.gaugeCap": "Animationswert · Interaktive Simulation", "hud.close": "Hinweis schließen",
+    "pin.body": "Karosserie", "pin.cabin": "Fahrgastzelle", "pin.under": "Unterboden", "pin.rear": "Heck",
+    "st.eyebrow": "Sechs Phasen", "st.h2": "Der Ablauf der Vorführung",
+    "st.lead": "Jede Phase lässt sich einzeln ansehen. Die Kennzeichnungen zeigen, was bei der Veranstaltung vorgeführt wurde, was Tesla angibt und was diese Seite simuliert.",
+    "st.facts": "Hintergrundfakten und Quellenkennzeichnung", "st.view": "Diese Phase ansehen", "st.stage": "PHASE {n}",
+    "tech.eyebrow": "Technik", "tech.h2": "Was in der Vorführung zu sehen war",
+    "tech.lead": "Kurze Erklärungen, die beim Stand des Veröffentlichten bleiben. Diese Seite ergänzt keine Konstruktionsdetails ohne bestätigte Quelle.",
+    "spec.eyebrow": "Technische Daten", "spec.h2": "Die von Tesla genannten Zahlen",
+    "spec.lead": "Alle Zahlen unten stammen von Tesla. Diese Seite prüft sie nicht unabhängig und stellt sie nicht als Messungen Dritter dar.",
+    "src.eyebrow": "Quellen", "src.h2": "An der Quelle nachprüfen",
+    "src.disclaimer": "Diese Website ist eine von Fans gebaute interaktive Simulation und kein offizielles Tesla-Produkt. Die Animation gibt Aerodynamik, Leistung und Aufbau eines Serienprodukts nicht exakt wieder.",
+    "foot.text": "Interaktive Simulation · McGregor, Texas · 15.10.2026 · Aus einfachen 3D-Formen gebaut, ohne extern geladene Bilder oder Modelle.",
+    "key.space": "Abspielen / Pause", "key.stage": "Phase wählen", "key.reset": "zurücksetzen",
+    "key.explore": "erkunden", "key.cam": "Standardwinkel", "key.full": "Vollbild",
+    "fb.title": "Die 3D-Bühne kann nicht angezeigt werden",
+    "fb.webgl": "In Ihrem Browser ist WebGL nicht aktiviert, daher lässt sich die 3D-Bühne nicht anzeigen. Die vollständigen Beschreibungen unten können Sie trotzdem lesen.",
+    "fb.lib": "Die 3D-Bibliothek (Three.js) konnte nicht geladen werden. Prüfen Sie die Verbindung und laden Sie die Seite neu. Der gesamte Text unten bleibt lesbar.",
+    "fb.init": "Die 3D-Bühne konnte auf diesem Gerät nicht starten. Die vollständigen Beschreibungen unten können Sie trotzdem lesen.",
+    "fb.link": "Phasenbeschreibungen lesen"
+  },
+  stages: [
+    { n: "Countdown zum Auftakt", r: "Die Vorführung beginnt in McGregor, Texas.", d: "Die Bühne wird dunkel, ein Lichtkegel wandert zu der Stelle, an der das Auto erscheint, und ein 3–2–1-Countdown läuft." },
+    { n: "Der Roadster erscheint", r: "Der Roadster rollt langsam in die Mitte der Bühne. Schalten Sie die Erkundungs-Beschriftungen ein, um die Hauptbereiche zu sehen.", d: "Das Auto fährt ein, die Scheinwerfer gehen an, und die Kamera wechselt von der Totalen in die Dreiviertelansicht von vorn." },
+    { n: "Ansaugsystem und überkopf geneigte Rampe", r: "In der Vorführung hält das Ansaugsystem unter dem Auto dieses an der überkopf geneigten Rampe. Die Rampengeometrie ist auf dieser Seite stilisiert.", d: "Das Auto fährt in die gekrümmte Rampe, die Lüfter im Unterboden leuchten cyan, und es durchfährt den Überkopfmoment." },
+    { n: "Sprung und Thruster-Manöver", r: "Die Bewegung in der Luft ist nach der Vorführung simuliert; die Animation ist kein exaktes physikalisches Modell.", d: "Das Auto beschleunigt bis zum Absprungpunkt, die Düsen an den vier Rädern blasen nach unten, das Auto hebt kurz ab, dreht sich in der Luft und überquert Lkw und Markierungsfahrzeuge." },
+    { n: "Landung", r: "Das Auto verliert an Höhe, setzt auf der Teststrecke auf, rollt ein kurzes Stück und hält an.", d: "Der Moment des Aufsetzens, mit leichtem Kamerawackeln, das sich im Anzeige-Bereich abschalten lässt." },
+    { n: "Beschleunigungssimulation", r: "Tesla gibt an, der Roadster erreiche 0–60 mph in unter einer Sekunde. Die Animationsdauer auf dieser Seite wurde gestreckt, damit man sie verfolgen kann.", d: "Das Auto kehrt an die Startlinie zurück, die Startampel wechselt die Farbe, Tacho und Beschleunigungsbalken folgen der Animation." }
+  ],
+  facts: [
+    "Die Vorführung fand am 15. Oktober 2026 auf dem SpaceX-Testgelände in McGregor, Texas, statt.",
+    "Der Roadster fuhr mithilfe eines Ansaugsystems im Unterboden eine überkopf geneigte Rampe entlang.",
+    "Das Auto führte mit Thrustern einen Sprung und eine Drehung in der Luft aus und landete anschließend.",
+    "Der Roadster wurde gezeigt, wie er einen Lkw und weitere Fahrzeuge überquert.",
+    "Tesla gibt an, das Auto beschleunige in unter einer Sekunde von 0 auf 60 mph.",
+    "Tesla nennt eine Höchstgeschwindigkeit über 230 mph und eine Reichweite über 300 Meilen pro Ladung.",
+    "Tesla gibt an, die Produktion solle 2028 beginnen.",
+    "Rampe, Schubstrahlen und Bewegungen auf dieser Seite sind aus einfachen 3D-Formen nachgebaut."
+  ],
+  tech: [
+    { t: "Ansaugsystem und überkopf geneigte Rampe", d: "In der Vorführung hält das Ansaugsystem unter dem Auto dieses an der überkopf geneigten Rampe. Saugwerte und konstruktive Details wurden nicht vollständig veröffentlicht." },
+    { t: "Thruster und Sprung", d: "Das Auto führte mit Thrustern einen Sprung und eine Drehung in der Luft aus und landete. Am Modell sind die nach unten gerichteten Strahlen an den vier Rädern stilisiert, um die Richtung des Auftriebs zu zeigen." },
+    { t: "Über Lkw und weitere Fahrzeuge", d: "Der Roadster wurde gezeigt, wie er einen Lkw und weitere Fahrzeuge überquert. Auf der 3D-Bühne dienen diese Fahrzeuge als Abstandsmarken." },
+    { t: "Beschleunigung", d: "Tesla gibt an, das Auto beschleunige in unter einer Sekunde von 0 auf 60 mph. Diese Zahl wird auf dieser Seite nicht unabhängig geprüft." },
+    { t: "Das 3D-Modell dieser Seite", d: "Auto, Rampe und Schubstrahlen bestehen aus einfachen Formen der 3D-Bibliothek. Formen und Bewegungen wurden für die Übersicht stilisiert." },
+    { t: "Animationsdauer", d: "Jede Phase wurde gestreckt, damit man sie verfolgen kann. Lesen Sie die Animationsdauer nicht als Messergebnis." }
+  ],
+  specs: [
+    { l: "Beschleunigung", v: "0–60 mph in unter 1 Sekunde" },
+    { l: "Höchstgeschwindigkeit", v: "Über 230 mph" },
+    { l: "Reichweite", v: "Über 300 Meilen pro Ladung" },
+    { l: "Produktion", v: "Tesla nennt einen Start im Jahr 2028" }
+  ],
+  hot: [
+    { t: "Ansaugsystem im Unterboden", d: "In der Vorführung erzeugt der Unterboden den Sog, der das Auto an der überkopf geneigten Rampe hält. Die Saugwerte wurden nicht vollständig veröffentlicht." },
+    { t: "Thruster-Düsen", d: "Die Thruster dienten in der Vorführung dem Sprung und der Drehung in der Luft. Das sind kurze Manöver, kein anhaltender Flug." },
+    { t: "Hubdüsen an den vier Ecken", d: "In der Vorführung hebt das Auto mit Thrustern ab. An diesem Modell sitzen die nach unten gerichteten Strahlen an den vier Rädern, um die Richtung des Auftriebs zu zeigen; Position und Form sind stilisiert." },
+    { t: "Räder", d: "Sporträder mit hellen Felgen. Die Proportionen von Reifen und Felge sind am Modell stilisiert." },
+    { t: "Karosserie und Aerodynamik", d: "Eine flache, gestreckte Karosserie, eine dunkle Glaskanzel und ein Heckflügel. Die aerodynamischen Details sind hier rein illustrativ." }
+  ]
+};
+
+I18N.zh = {
+  t: {
+    "nav.sim": "模拟演示", "nav.stages": "演示阶段", "nav.tech": "技术",
+    "nav.specs": "参数", "nav.sources": "参考来源", "nav.full": "全屏",
+    "tag.event": "活动现场演示内容", "tag.claim": "特斯拉公布", "tag.sim": "互动模拟内容",
+    "hero.eyebrow": "德州麦格雷戈 · 2026.10.15",
+    "hero.title": "Roadster — 一场<em>超越极限</em>的演示",
+    "hero.sub": "探索 2026 年 10 月 15 日特斯拉 Roadster 在德州麦格雷戈的演示。六个阶段、一个 3D 舞台，每条信息都标明来源。",
+    "hero.cta1": "开始模拟", "hero.cta2": "查看各阶段", "hero.note": "风格化示意图 — 并非产品照片",
+    "sim.eyebrow": "模拟舞台", "sim.h2": "逐个阶段重现这场演示",
+    "sim.lead": "动画由基本 3D 几何体搭建而成。这是受该活动启发的可视化模拟，并不还原量产产品的空气动力学、性能或结构。",
+    "pan.program": "演示程序", "pan.playAll": "播放全部", "pan.pause": "暂停", "pan.resume": "继续",
+    "pan.replay": "重播本阶段", "pan.reset": "重置", "pan.speed": "动画速度",
+    "pan.slow": "慢", "pan.normal": "正常", "pan.fast": "快",
+    "pan.display": "显示", "pan.jet": "气流喷射", "pan.narrLabel": "画面解说",
+    "pan.shake": "着陆时镜头震动", "pan.labels": "车辆标注", "pan.slowmo": "慢动作模式（第 6 阶段）",
+    "pan.camera": "视角", "pan.wide": "全景", "pan.side": "侧视", "pan.follow": "跟随车辆",
+    "pan.free": "自由旋转", "pan.camReset": "默认视角",
+    "pan.camHint": "拖动或滑动可旋转视角，滚轮或双指捏合可缩放。",
+    "pan.mode": "模式", "pan.explore": "探索模式", "pan.programMode": "演示程序",
+    "pan.replayHop": "重看腾空动作", "pan.runLaunch": "运行加速测试",
+    "hud.step": "第 {n} / 6 阶段", "hud.modeProgram": "演示程序", "hud.modeExplore": "探索模式",
+    "hud.gaugeCap": "动画数值 · 互动模拟内容", "hud.close": "关闭说明",
+    "pin.body": "车身", "pin.cabin": "座舱", "pin.under": "车底", "pin.rear": "车尾",
+    "st.eyebrow": "六个阶段", "st.h2": "演示的全过程",
+    "st.lead": "每个阶段都可以单独观看。下方标签说明哪些是现场演示内容、哪些是特斯拉公布的信息、哪些由本页模拟生成。",
+    "st.facts": "背景事实与来源标签", "st.view": "观看本阶段", "st.stage": "阶段 {n}",
+    "tech.eyebrow": "技术", "tech.h2": "演示中出现的内容",
+    "tech.lead": "简短说明，只停留在已公开的信息范围内。本页不补充没有确认来源的结构细节。",
+    "spec.eyebrow": "参数", "spec.h2": "特斯拉公布的数字",
+    "spec.lead": "以下全部数字均为特斯拉公布的信息。本页未作独立核实，也不将其呈现为第三方实测结果。",
+    "src.eyebrow": "参考来源", "src.h2": "回到原始来源核实",
+    "src.disclaimer": "本网站是爱好者制作的互动模拟，并非特斯拉官方产品。动画不会准确还原量产产品的空气动力学、性能或结构。",
+    "foot.text": "互动模拟 · 德州麦格雷戈 · 2026.10.15 · 使用基本 3D 几何体搭建，未加载任何外部图片或模型。",
+    "key.space": "播放 / 暂停", "key.stage": "选择阶段", "key.reset": "重置",
+    "key.explore": "探索模式", "key.cam": "默认视角", "key.full": "全屏",
+    "fb.title": "无法显示 3D 舞台",
+    "fb.webgl": "您的浏览器未启用 WebGL，因此无法显示 3D 舞台。下方关于各阶段、技术与参数的完整说明仍可正常阅读。",
+    "fb.lib": "无法加载 3D 库（Three.js）。请检查网络连接后重新载入页面。下方全部文字内容仍可正常阅读。",
+    "fb.init": "3D 舞台无法在此设备上启动。下方关于各阶段、技术与参数的完整说明仍可正常阅读。",
+    "fb.link": "查看各阶段说明"
+  },
+  stages: [
+    { n: "开场倒计时", r: "演示在德州麦格雷戈拉开序幕。", d: "舞台转暗，一道光束扫向车辆出现的位置，屏幕上出现 3–2–1 倒计时。" },
+    { n: "Roadster 登场", r: "Roadster 缓缓驶入舞台中央。打开车辆标注可查看主要部位。", d: "车辆入场、车灯点亮，镜头从全景切换到前四分之三视角。" },
+    { n: "吸附系统与倒置坡道", r: "在演示中，车底的吸附系统让车辆贴住倒置坡道。本页的坡道造型为风格化处理。", d: "车辆驶入弯曲坡道，车底风扇亮起青色，并通过车身倒置的瞬间。" },
+    { n: "腾空与推进器动作", r: "空中动作根据演示内容模拟；该动画并非精确的物理模型。", d: "车辆加速至起跳点，四个车轮角落的喷口向下吹向路面，车辆短暂离地、在空中旋转，并越过卡车与作为参照的车辆。" },
+    { n: "着陆", r: "车辆降低高度，在测试道上着陆，再滑行一小段后停下。", d: "着地瞬间伴有轻微镜头震动，可在显示面板中关闭。" },
+    { n: "加速模拟", r: "特斯拉称 Roadster 可在一秒以内完成 0–60 英里/小时加速。本页的动画时长已被拉长，便于观看。", d: "车辆回到起跑线，发车灯变色，速度表与加速条随动画变化。" }
+  ],
+  facts: [
+    "该演示于 2026 年 10 月 15 日在德州麦格雷戈的 SpaceX 试验基地举行。",
+    "Roadster 依靠车底的吸附系统在一段倒置坡道上行驶。",
+    "车辆使用推进器完成腾空与空中旋转动作，随后着陆。",
+    "演示中展示了 Roadster 越过一辆卡车和其他车辆。",
+    "特斯拉称该车可在一秒以内从 0 加速到 60 英里/小时。",
+    "特斯拉给出的最高时速超过 230 英里，单次充电续航超过 300 英里。",
+    "特斯拉称预计于 2028 年开始生产。",
+    "本页的坡道、气流与运动均由基本 3D 几何体重新搭建。"
+  ],
+  tech: [
+    { t: "吸附系统与倒置坡道", d: "在演示中，车底的吸附系统让车辆贴住倒置坡道。吸附力数值与详细结构尚未完整公布。" },
+    { t: "推进器与腾空动作", d: "车辆使用推进器完成腾空与空中旋转，随后着陆。模型上四个车轮角落的向下气流为风格化处理，用于显示升力方向。" },
+    { t: "越过卡车与其他车辆", d: "演示中展示了 Roadster 越过一辆卡车和其他车辆。在 3D 舞台上，这些车辆作为参照物帮助判断距离。" },
+    { t: "加速", d: "特斯拉称该车可在一秒以内从 0 加速到 60 英里/小时。本页未对该数字作独立核实。" },
+    { t: "本页的 3D 模型", d: "车辆、坡道与气流均由 3D 库中的基本几何体构成，造型与运动经过风格化处理以便观看。" },
+    { t: "动画时长", d: "每个阶段的时长都被拉长，以便观众看清。请勿将本页的动画时长视为实测结果。" }
+  ],
+  specs: [
+    { l: "加速", v: "0–60 英里/小时，用时不到 1 秒" },
+    { l: "最高时速", v: "超过 230 英里/小时" },
+    { l: "续航里程", v: "单次充电超过 300 英里" },
+    { l: "量产", v: "特斯拉称预计 2028 年开始" }
+  ],
+  hot: [
+    { t: "车底吸附系统", d: "在演示中，车底产生的吸附力让车辆贴住倒置坡道。吸附力数值尚未完整公布。" },
+    { t: "推进器喷口", d: "推进器用于演示中的腾空与空中旋转动作。这些是短暂的动作，并非持续飞行。" },
+    { t: "四角升力喷口", d: "演示中车辆依靠推进器离地。本模型将向下的气流放在四个车轮角落，用于显示升力方向；喷口的位置与形状为风格化处理。" },
+    { t: "车轮", d: "运动化车轮搭配浅色轮辋。模型上轮胎与轮辋的比例经过风格化处理，便于观看。" },
+    { t: "车身与空气动力学设计", d: "低矮修长的车身、深色玻璃座舱和尾翼。这里的空气动力学细节仅作示意。" }
+  ]
+};
+
+I18N.ja = {
+  t: {
+    "nav.sim": "シミュレーション", "nav.stages": "デモの各段階", "nav.tech": "技術",
+    "nav.specs": "スペック", "nav.sources": "参考情報源", "nav.full": "全画面",
+    "tag.event": "イベントで実演された内容", "tag.claim": "テスラ発表", "tag.sim": "インタラクティブな再現",
+    "hero.eyebrow": "テキサス州マクレガー · 2026.10.15",
+    "hero.title": "Roadster — <em>限界を越えた</em>デモンストレーション",
+    "hero.sub": "2026年10月15日、テキサス州マクレガーで行われたテスラ Roadster のデモを体験できます。6つの段階、3Dステージ、そしてすべての情報に出典ラベル付き。",
+    "hero.cta1": "シミュレーションを開始", "hero.cta2": "各段階を見る", "hero.note": "様式化したスケッチ — 製品写真ではありません",
+    "sim.eyebrow": "シミュレーションステージ", "sim.h2": "デモを段階ごとに再生する",
+    "sim.lead": "アニメーションは基本的な3D形状で構成されています。イベントに着想を得た視覚的な再現であり、市販製品の空力・性能・構造を正確に再現するものではありません。",
+    "pan.program": "プログラム", "pan.playAll": "すべて再生", "pan.pause": "一時停止", "pan.resume": "再開",
+    "pan.replay": "この段階を再生", "pan.reset": "リセット", "pan.speed": "アニメーション速度",
+    "pan.slow": "遅い", "pan.normal": "標準", "pan.fast": "速い",
+    "pan.display": "表示", "pan.jet": "噴射の表示", "pan.narrLabel": "画面上の解説",
+    "pan.shake": "着地時のカメラ振動", "pan.labels": "車体ラベル", "pan.slowmo": "スローモード（段階6）",
+    "pan.camera": "カメラ", "pan.wide": "全景", "pan.side": "横から", "pan.follow": "車を追う",
+    "pan.free": "自由回転", "pan.camReset": "既定のアングル",
+    "pan.camHint": "ドラッグまたはスワイプで回転、ホイールまたはピンチで拡大縮小します。",
+    "pan.mode": "モード", "pan.explore": "探索モード", "pan.programMode": "プログラム",
+    "pan.replayHop": "跳躍をもう一度見る", "pan.runLaunch": "加速テストを実行",
+    "hud.step": "段階 {n} / 6", "hud.modeProgram": "デモプログラム", "hud.modeExplore": "探索モード",
+    "hud.gaugeCap": "アニメーション上の数値 · 再現表示", "hud.close": "注釈を閉じる",
+    "pin.body": "ボディ", "pin.cabin": "キャビン", "pin.under": "車体下部", "pin.rear": "リア",
+    "st.eyebrow": "6つの段階", "st.h2": "デモの流れ",
+    "st.lead": "各段階は個別に再生できます。下のラベルは、イベントで実演された内容、テスラが発表した情報、このページでの再現を区別して示します。",
+    "st.facts": "背景となる事実と出典ラベル", "st.view": "この段階を見る", "st.stage": "段階 {n}",
+    "tech.eyebrow": "技術", "tech.h2": "デモに登場した要素",
+    "tech.lead": "公表された範囲にとどめた短い説明です。確認できる出典のない構造の詳細は、このページでは補足していません。",
+    "spec.eyebrow": "スペック", "spec.h2": "テスラが公表した数値",
+    "spec.lead": "以下の数値はすべてテスラが公表した情報です。このページでは独自に検証しておらず、第三者による実測値としても扱っていません。",
+    "src.eyebrow": "参考情報源", "src.h2": "一次情報で確認する",
+    "src.disclaimer": "このサイトはファンが制作したインタラクティブな再現であり、テスラの公式製品ではありません。アニメーションは市販製品の空力・性能・構造を正確に再現するものではありません。",
+    "foot.text": "インタラクティブな再現 · テキサス州マクレガー · 2026.10.15 · 基本的な3D形状で構築し、外部の画像やモデルは読み込んでいません。",
+    "key.space": "再生 / 一時停止", "key.stage": "段階を選ぶ", "key.reset": "リセット",
+    "key.explore": "探索モード", "key.cam": "既定のアングル", "key.full": "全画面",
+    "fb.title": "3Dステージを表示できません",
+    "fb.webgl": "お使いのブラウザで WebGL が有効になっていないため、3Dステージを表示できません。以下の各段階・技術・スペックの説明はそのままお読みいただけます。",
+    "fb.lib": "3Dライブラリ（Three.js）を読み込めませんでした。接続を確認してページを再読み込みしてください。以下の本文はそのまま読めます。",
+    "fb.init": "この端末では3Dステージを起動できませんでした。以下の各段階・技術・スペックの説明はそのままお読みいただけます。",
+    "fb.link": "各段階の説明を読む"
+  },
+  stages: [
+    { n: "開幕のカウントダウン", r: "テキサス州マクレガーでデモが幕を開けます。", d: "ステージが暗くなり、光が車の現れる位置を照らし、画面に3–2–1のカウントダウンが流れます。" },
+    { n: "Roadster の登場", r: "Roadster がステージ中央へゆっくり進みます。車体ラベルを表示すると主要部位を確認できます。", d: "車が入場してライトが点灯し、カメラが全景から前方四分の三のアングルへ移ります。" },
+    { n: "吸着システムと反転したランプ", r: "デモでは、車体下部の吸着システムが車をランプの反転面に押さえつけます。このページのランプ形状は様式化されています。", d: "車が曲面ランプに進入し、床下のファンがシアン色に光り、上下が反転する瞬間を通過します。" },
+    { n: "跳躍とスラスター操作", r: "空中の動きはデモをもとにした再現で、正確な物理モデルではありません。", d: "車が踏み切り地点まで加速し、四隅のノズルが路面へ向けて噴射、短時間だけ離陸して空中で回転し、トラックと目印の車両を越えます。" },
+    { n: "着地", r: "車は高度を下げてテストコースに着地し、短く走ってから停止します。", d: "接地の瞬間には軽いカメラ振動が入ります（表示パネルでオフにできます）。" },
+    { n: "加速シミュレーション", r: "テスラは Roadster が0–60 mph を1秒未満で達成できると発表しています。このページのアニメーション時間は見やすいように引き伸ばしています。", d: "車がスタートラインに戻り、スタートライトの色が変わり、速度計と加速バーがアニメーションに合わせて動きます。" }
+  ],
+  facts: [
+    "デモは2026年10月15日、テキサス州マクレガーの SpaceX 試験施設で行われました。",
+    "Roadster は車体下部の吸着システムを使い、反転したランプ上を走行しました。",
+    "車はスラスターで跳躍と空中回転を行い、その後着地しました。",
+    "Roadster がトラックやほかの車両を越える様子が実演されました。",
+    "テスラは0から60 mph への加速を1秒未満と発表しています。",
+    "テスラは最高速度230 mph 超、1回の充電での航続距離300マイル超としています。",
+    "テスラは生産開始を2028年の見込みとしています。",
+    "このページのランプ・噴射・動きは、基本的な3D形状で作り直したものです。"
+  ],
+  tech: [
+    { t: "吸着システムと反転したランプ", d: "デモでは車体下部の吸着システムが車をランプの反転面に押さえつけます。吸着力の数値や詳細な構造は完全には公表されていません。" },
+    { t: "スラスターと跳躍", d: "車はスラスターで跳躍と空中回転を行い、着地しました。このモデルでは、四隅から下向きに出る噴射は揚力の向きを示すための様式化表現です。" },
+    { t: "トラックやほかの車両を越える", d: "Roadster がトラックやほかの車両を越える様子が実演されました。3Dステージでは、これらの車両が距離をつかむための目印になっています。" },
+    { t: "加速", d: "テスラは0から60 mph への加速を1秒未満と発表しています。この数値はこのページで独自に検証したものではありません。" },
+    { t: "このページの3Dモデル", d: "車・ランプ・噴射はすべて3Dライブラリの基本形状で作られています。形状と動きは見やすさを優先して様式化しています。" },
+    { t: "アニメーションの時間", d: "各段階は見やすいように引き伸ばしています。このページのアニメーション時間を実測値として扱わないでください。" }
+  ],
+  specs: [
+    { l: "加速", v: "0–60 mph を1秒未満" },
+    { l: "最高速度", v: "230 mph 超" },
+    { l: "航続距離", v: "1回の充電で300マイル超" },
+    { l: "生産", v: "テスラは2028年開始の見込みと発表" }
+  ],
+  hot: [
+    { t: "車体下部の吸着システム", d: "デモでは車体下部が吸着力を生み、車をランプの反転面に保持します。吸着力の数値は完全には公表されていません。" },
+    { t: "スラスターのノズル", d: "スラスターはデモでの跳躍と空中回転に使われました。いずれも短時間の動作で、継続的な飛行ではありません。" },
+    { t: "四隅の揚力ノズル", d: "デモで車はスラスターによって離陸します。このモデルでは揚力の向きが分かるよう、下向きの噴射を四隅に配置しています。位置と形状は様式化したものです。" },
+    { t: "ホイール", d: "明るいリムのスポーツホイールです。タイヤとリムの比率は見やすさのために様式化しています。" },
+    { t: "ボディと空力デザイン", d: "低く長いボディ、暗いガラスキャビン、リアウイング。ここでの空力ディテールはあくまで図示用です。" }
+  ]
+};
+
+I18N.ko = {
+  t: {
+    "nav.sim": "시뮬레이션", "nav.stages": "시연 단계", "nav.tech": "기술",
+    "nav.specs": "제원", "nav.sources": "참고 출처", "nav.full": "전체 화면",
+    "tag.event": "행사에서 시연된 내용", "tag.claim": "테슬라 발표", "tag.sim": "인터랙티브 시뮬레이션",
+    "hero.eyebrow": "텍사스주 맥그레거 · 2026.10.15",
+    "hero.title": "Roadster — <em>한계를 넘어선</em> 시연",
+    "hero.sub": "2026년 10월 15일 텍사스주 맥그레거에서 열린 테슬라 Roadster 시연을 살펴보세요. 여섯 단계, 하나의 3D 무대, 그리고 모든 정보에 붙은 출처 표시.",
+    "hero.cta1": "시뮬레이션 시작", "hero.cta2": "단계 보기", "hero.note": "양식화된 스케치 — 제품 사진이 아닙니다",
+    "sim.eyebrow": "시뮬레이션 무대", "sim.h2": "시연을 단계별로 다시 재생하기",
+    "sim.lead": "애니메이션은 기본 3D 도형으로 만들었습니다. 행사에서 영감을 받은 시각적 시뮬레이션이며, 양산 제품의 공력·성능·구조를 그대로 재현하지 않습니다.",
+    "pan.program": "프로그램", "pan.playAll": "전체 재생", "pan.pause": "일시정지", "pan.resume": "계속",
+    "pan.replay": "이 단계 다시 재생", "pan.reset": "초기화", "pan.speed": "애니메이션 속도",
+    "pan.slow": "느리게", "pan.normal": "보통", "pan.fast": "빠르게",
+    "pan.display": "표시", "pan.jet": "분사 효과", "pan.narrLabel": "화면 해설",
+    "pan.shake": "착지 시 카메라 흔들림", "pan.labels": "차량 탐색 라벨", "pan.slowmo": "슬로 모션 모드 (6단계)",
+    "pan.camera": "시점", "pan.wide": "전경", "pan.side": "측면", "pan.follow": "차량 따라가기",
+    "pan.free": "자유 회전", "pan.camReset": "기본 각도",
+    "pan.camHint": "드래그하거나 밀어서 회전하고, 휠이나 두 손가락으로 확대·축소합니다.",
+    "pan.mode": "모드", "pan.explore": "탐색 모드", "pan.programMode": "프로그램",
+    "pan.replayHop": "점프 다시 보기", "pan.runLaunch": "가속 테스트 실행",
+    "hud.step": "{n} / 6 단계", "hud.modeProgram": "시연 프로그램", "hud.modeExplore": "탐색 모드",
+    "hud.gaugeCap": "애니메이션 수치 · 인터랙티브 시뮬레이션", "hud.close": "설명 닫기",
+    "pin.body": "차체", "pin.cabin": "실내", "pin.under": "하부", "pin.rear": "후면",
+    "st.eyebrow": "여섯 단계", "st.h2": "시연이 진행된 순서",
+    "st.lead": "각 단계는 따로 볼 수 있습니다. 아래 표시는 행사에서 시연된 내용, 테슬라가 발표한 정보, 이 페이지가 시뮬레이션한 부분을 구분해 줍니다.",
+    "st.facts": "배경 사실과 출처 표시", "st.view": "이 단계 보기", "st.stage": "{n}단계",
+    "tech.eyebrow": "기술", "tech.h2": "시연에 등장한 요소",
+    "tech.lead": "공개된 범위 안에서만 간단히 설명합니다. 확인된 출처가 없는 구조 정보는 이 페이지에서 덧붙이지 않습니다.",
+    "spec.eyebrow": "제원", "spec.h2": "테슬라가 발표한 수치",
+    "spec.lead": "아래 수치는 모두 테슬라가 공개한 정보입니다. 이 페이지에서 독립적으로 검증하지 않았으며 제3자 측정 결과로 제시하지도 않습니다.",
+    "src.eyebrow": "참고 출처", "src.h2": "원 출처에서 확인하기",
+    "src.disclaimer": "이 웹사이트는 팬이 만든 인터랙티브 시뮬레이션이며 테슬라의 공식 제품이 아닙니다. 애니메이션은 양산 제품의 공력·성능·구조를 정확히 재현하지 않습니다.",
+    "foot.text": "인터랙티브 시뮬레이션 · 텍사스주 맥그레거 · 2026.10.15 · 기본 3D 도형으로 제작했으며 외부 이미지나 모델을 불러오지 않습니다.",
+    "key.space": "재생 / 일시정지", "key.stage": "단계 선택", "key.reset": "초기화",
+    "key.explore": "탐색 모드", "key.cam": "기본 각도", "key.full": "전체 화면",
+    "fb.title": "3D 무대를 표시할 수 없습니다",
+    "fb.webgl": "브라우저에서 WebGL이 꺼져 있어 3D 무대를 표시할 수 없습니다. 아래의 단계·기술·제원 설명은 그대로 읽을 수 있습니다.",
+    "fb.lib": "3D 라이브러리(Three.js)를 불러오지 못했습니다. 연결을 확인한 뒤 페이지를 새로고침해 주세요. 아래 본문은 정상적으로 읽을 수 있습니다.",
+    "fb.init": "이 기기에서는 3D 무대를 시작할 수 없었습니다. 아래의 단계·기술·제원 설명은 그대로 읽을 수 있습니다.",
+    "fb.link": "단계 설명 보기"
+  },
+  stages: [
+    { n: "개막 카운트다운", r: "텍사스주 맥그레거에서 시연이 시작됩니다.", d: "무대가 어두워지고 빛줄기가 차량이 나타날 자리를 비추며 화면에 3–2–1 카운트다운이 흐릅니다." },
+    { n: "Roadster 등장", r: "Roadster가 무대 중앙으로 천천히 들어옵니다. 차량 탐색 라벨을 켜면 주요 부위를 볼 수 있습니다.", d: "차량이 들어오고 전조등이 켜지며, 카메라가 전경에서 전방 4분의 3 각도로 옮겨갑니다." },
+    { n: "흡착 시스템과 뒤집힌 경사면", r: "시연에서는 차량 하부의 흡착 시스템이 차를 뒤집힌 경사면에 붙여 줍니다. 이 페이지의 경사면 형상은 양식화한 것입니다.", d: "차량이 곡면 경사로에 진입하고 하부 팬이 청록색으로 빛나며 상하가 뒤집히는 순간을 지나갑니다." },
+    { n: "점프와 추력기 동작", r: "공중 동작은 시연을 바탕으로 한 시뮬레이션이며 정확한 물리 모델이 아닙니다.", d: "차량이 도약 지점까지 가속하고 네 바퀴 모서리의 노즐이 노면으로 분사하며, 짧게 떠올라 공중에서 회전한 뒤 트럭과 기준 차량들을 넘어갑니다." },
+    { n: "착지", r: "차량이 고도를 낮춰 주행로에 착지한 뒤 조금 더 달리다 멈춥니다.", d: "접지 순간에는 가벼운 카메라 흔들림이 들어가며, 표시 패널에서 끌 수 있습니다." },
+    { n: "가속 시뮬레이션", r: "테슬라는 Roadster가 0–60 mph를 1초 미만에 달성할 수 있다고 밝혔습니다. 이 페이지의 애니메이션 시간은 보기 쉽도록 늘렸습니다.", d: "차량이 출발선으로 돌아오고 출발 신호등 색이 바뀌며, 속도계와 가속 막대가 애니메이션을 따라 움직입니다." }
+  ],
+  facts: [
+    "시연은 2026년 10월 15일 텍사스주 맥그레거의 SpaceX 시험 시설에서 열렸습니다.",
+    "Roadster는 차량 하부의 흡착 시스템을 이용해 뒤집힌 경사면을 달렸습니다.",
+    "차량은 추력기로 점프와 공중 회전을 한 뒤 착지했습니다.",
+    "Roadster가 트럭과 다른 차량들을 넘는 장면이 시연되었습니다.",
+    "테슬라는 차량이 0에서 60 mph까지 1초 미만에 가속할 수 있다고 밝혔습니다.",
+    "테슬라는 최고 속도 230 mph 이상, 1회 충전 주행거리 300마일 이상이라고 제시합니다.",
+    "테슬라는 2028년에 생산을 시작할 예정이라고 밝혔습니다.",
+    "이 페이지의 경사면, 분사, 움직임은 모두 기본 3D 도형으로 다시 만든 것입니다."
+  ],
+  tech: [
+    { t: "흡착 시스템과 뒤집힌 경사면", d: "시연에서는 차량 하부의 흡착 시스템이 차를 뒤집힌 경사면에 붙여 줍니다. 흡착력 수치와 상세 구조는 완전히 공개되지 않았습니다." },
+    { t: "추력기와 점프", d: "차량은 추력기로 점프와 공중 회전을 한 뒤 착지했습니다. 이 모델에서 네 바퀴 모서리의 아래쪽 분사는 양력 방향을 보여주기 위한 양식화 표현입니다." },
+    { t: "트럭과 다른 차량 넘기", d: "Roadster가 트럭과 다른 차량들을 넘는 장면이 시연되었습니다. 3D 무대에서 이 차량들은 거리를 가늠하는 기준물 역할을 합니다." },
+    { t: "가속", d: "테슬라는 0에서 60 mph까지 1초 미만이라고 밝혔습니다. 이 수치는 이 페이지에서 독립적으로 검증하지 않았습니다." },
+    { t: "이 페이지의 3D 모델", d: "차량과 경사면, 분사는 모두 3D 라이브러리의 기본 도형으로 만들었습니다. 형상과 움직임은 보기 쉽도록 양식화했습니다." },
+    { t: "애니메이션 시간", d: "각 단계는 관찰하기 쉽도록 늘려 놓았습니다. 이 페이지의 애니메이션 시간을 실제 측정 결과로 보지 마세요." }
+  ],
+  specs: [
+    { l: "가속", v: "0–60 mph, 1초 미만" },
+    { l: "최고 속도", v: "230 mph 이상" },
+    { l: "주행거리", v: "1회 충전 300마일 이상" },
+    { l: "생산", v: "테슬라 발표 기준 2028년 시작 예정" }
+  ],
+  hot: [
+    { t: "하부 흡착 시스템", d: "시연에서 차량 하부가 흡착력을 만들어 차를 뒤집힌 경사면에 붙여 줍니다. 흡착력 수치는 완전히 공개되지 않았습니다." },
+    { t: "추력기 노즐", d: "추력기는 시연에서 점프와 공중 회전에 쓰였습니다. 모두 짧은 동작이며 지속적인 비행이 아닙니다." },
+    { t: "네 모서리의 양력 노즐", d: "시연에서 차량은 추력기로 지면을 떠납니다. 이 모델에서는 양력 방향이 잘 보이도록 아래쪽 분사를 네 바퀴 모서리에 두었으며, 위치와 형상은 양식화한 것입니다." },
+    { t: "휠", d: "밝은 휠을 쓴 스포츠 타입입니다. 타이어와 휠의 비율은 보기 쉽도록 양식화했습니다." },
+    { t: "차체와 공력 디자인", d: "낮고 긴 차체, 어두운 유리 캐빈, 뒤쪽 윙. 여기의 공력 요소는 예시용입니다." }
+  ]
+};
+
+I18N.ar = {
+  t: {
+    "nav.sim": "المحاكاة", "nav.stages": "مراحل العرض", "nav.tech": "التقنية",
+    "nav.specs": "المواصفات", "nav.sources": "المصادر", "nav.full": "ملء الشاشة",
+    "tag.event": "عُرض في الحدث", "tag.claim": "إعلان من تسلا", "tag.sim": "محاكاة تفاعلية",
+    "hero.eyebrow": "ماكجريجور، تكساس · 15.10.2026",
+    "hero.title": "رودستر — عرض <em>يتجاوز الحدود</em>",
+    "hero.sub": "استكشف عرض تسلا رودستر في ماكجريجور بولاية تكساس · 15 أكتوبر 2026. ست مراحل، ومسرح ثلاثي الأبعاد، ووسم للمصدر على كل معلومة.",
+    "hero.cta1": "ابدأ المحاكاة", "hero.cta2": "عرض المراحل", "hero.note": "رسم مبسّط — ليس صورة للمنتج",
+    "sim.eyebrow": "مسرح المحاكاة", "sim.h2": "أعد تشغيل العرض مرحلة تلو الأخرى",
+    "sim.lead": "بُنيت الرسوم المتحركة من أشكال ثلاثية الأبعاد بسيطة. هذه محاكاة بصرية مستوحاة من الحدث، ولا تُعيد إنتاج الديناميكا الهوائية أو الأداء أو بنية منتج تجاري.",
+    "pan.program": "البرنامج", "pan.playAll": "تشغيل الكل", "pan.pause": "إيقاف مؤقت", "pan.resume": "متابعة",
+    "pan.replay": "إعادة المرحلة", "pan.reset": "إعادة ضبط", "pan.speed": "سرعة الحركة",
+    "pan.slow": "بطيئة", "pan.normal": "عادية", "pan.fast": "سريعة",
+    "pan.display": "العرض", "pan.jet": "نفث الدفع", "pan.narrLabel": "التعليق على الشاشة",
+    "pan.shake": "اهتزاز الكاميرا عند الهبوط", "pan.labels": "بطاقات استكشاف السيارة", "pan.slowmo": "وضع الحركة البطيئة (المرحلة 6)",
+    "pan.camera": "الكاميرا", "pan.wide": "لقطة واسعة", "pan.side": "منظر جانبي", "pan.follow": "تتبّع السيارة",
+    "pan.free": "دوران حر", "pan.camReset": "الزاوية الافتراضية",
+    "pan.camHint": "اسحب أو مرّر للدوران، واستخدم عجلة الفأرة أو إصبعين للتكبير.",
+    "pan.mode": "الوضع", "pan.explore": "وضع الاستكشاف", "pan.programMode": "البرنامج",
+    "pan.replayHop": "إعادة مشاهدة القفزة", "pan.runLaunch": "تشغيل اختبار التسارع",
+    "hud.step": "المرحلة {n} / 6", "hud.modeProgram": "برنامج العرض", "hud.modeExplore": "وضع الاستكشاف",
+    "hud.gaugeCap": "قيمة من الرسوم المتحركة · محاكاة تفاعلية", "hud.close": "إغلاق الملاحظة",
+    "pin.body": "الهيكل", "pin.cabin": "المقصورة", "pin.under": "أسفل السيارة", "pin.rear": "المؤخرة",
+    "st.eyebrow": "ست مراحل", "st.h2": "كيف جرى العرض",
+    "st.lead": "يمكن مشاهدة كل مرحلة على حدة. توضّح الوسوم أدناه ما عُرض في الحدث، وما أعلنته تسلا، وما تحاكيه هذه الصفحة.",
+    "st.facts": "الوقائع الأساسية ووسوم المصدر", "st.view": "شاهد هذه المرحلة", "st.stage": "المرحلة {n}",
+    "tech.eyebrow": "التقنية", "tech.h2": "ما ظهر في العرض",
+    "tech.lead": "شروح قصيرة تلتزم بما نُشر فقط. لا تضيف هذه الصفحة أي تفاصيل بنيوية دون مصدر مؤكد.",
+    "spec.eyebrow": "المواصفات", "spec.h2": "الأرقام التي أعلنتها تسلا",
+    "spec.lead": "كل الأرقام أدناه معلومات نشرتها تسلا. لا تتحقق منها هذه الصفحة بشكل مستقل ولا تقدّمها كقياسات من جهة ثالثة.",
+    "src.eyebrow": "المصادر", "src.h2": "تحقّق من المصدر الأصلي",
+    "src.disclaimer": "هذا الموقع محاكاة تفاعلية من صنع أحد المعجبين، وليس منتجًا رسميًا من تسلا. لا تُعيد الرسوم المتحركة إنتاج الديناميكا الهوائية أو الأداء أو بنية منتج تجاري بدقة.",
+    "foot.text": "محاكاة تفاعلية · ماكجريجور، تكساس · 15.10.2026 · مبنية من أشكال ثلاثية الأبعاد بسيطة، دون تحميل أي صور أو نماذج خارجية.",
+    "key.space": "تشغيل / إيقاف", "key.stage": "اختيار مرحلة", "key.reset": "إعادة ضبط",
+    "key.explore": "الاستكشاف", "key.cam": "الزاوية الافتراضية", "key.full": "ملء الشاشة",
+    "fb.title": "تعذّر عرض المسرح ثلاثي الأبعاد",
+    "fb.webgl": "خاصية WebGL غير مفعّلة في متصفحك، لذا تعذّر عرض المسرح ثلاثي الأبعاد. لا يزال بإمكانك قراءة شرح المراحل والتقنية والمواصفات أدناه كاملًا.",
+    "fb.lib": "تعذّر تحميل مكتبة الرسوم ثلاثية الأبعاد (Three.js). تحقّق من الاتصال ثم أعد تحميل الصفحة. يبقى النص أدناه قابلًا للقراءة.",
+    "fb.init": "تعذّر تشغيل المسرح ثلاثي الأبعاد على هذا الجهاز. لا يزال بإمكانك قراءة شرح المراحل والتقنية والمواصفات أدناه كاملًا.",
+    "fb.link": "اقرأ شرح المراحل"
+  },
+  stages: [
+    { n: "العد التنازلي الافتتاحي", r: "يبدأ العرض في ماكجريجور بولاية تكساس.", d: "يخفت ضوء المسرح، ويمسح شعاع المكان الذي تظهر فيه السيارة، ويظهر عد تنازلي 3–2–1 على الشاشة." },
+    { n: "ظهور رودستر", r: "تتقدم رودستر ببطء إلى وسط المسرح. فعّل بطاقات استكشاف السيارة لرؤية الأجزاء الرئيسية.", d: "تدخل السيارة وتضيء مصابيحها، وتنتقل الكاميرا من اللقطة الواسعة إلى زاوية ثلاثة أرباع أمامية." },
+    { n: "نظام الشفط والمنحدر المقلوب", r: "في العرض، يثبّت نظام الشفط أسفل السيارة التصاقها بالمنحدر المقلوب. شكل المنحدر في هذه الصفحة مبسّط.", d: "تدخل السيارة المنحدر المنحني، وتتوهج المراوح السفلية باللون السماوي، وتمر بلحظة السير مقلوبة." },
+    { n: "القفزة ومناورة الدافعات", r: "الحركة في الهواء محاكاة مبنية على العرض، وليست نموذجًا فيزيائيًا دقيقًا.", d: "تتسارع السيارة حتى نقطة الانطلاق، وتنفث الفوهات عند زوايا العجلات الأربع نحو الأرض، فترتفع لوقت قصير وتدور في الهواء وتتجاوز الشاحنة والسيارات الدالة." },
+    { n: "الهبوط", r: "تنخفض السيارة وتهبط على مسار الاختبار، ثم تسير مسافة قصيرة وتتوقف.", d: "لحظة الملامسة مع اهتزاز خفيف للكاميرا يمكن إيقافه من لوحة العرض." },
+    { n: "محاكاة التسارع", r: "تقول تسلا إن رودستر تبلغ 0–60 ميلًا في الساعة في أقل من ثانية. زمن الحركة في هذه الصفحة مُمدّد ليتمكن المشاهد من المتابعة.", d: "تعود السيارة إلى خط البداية، وتتغير ألوان أضواء الانطلاق، ويتحرك عداد السرعة وشريط التسارع مع الرسوم المتحركة." }
+  ],
+  facts: [
+    "جرى العرض في 15 أكتوبر 2026 في منشأة اختبارات سبيس إكس بماكجريجور، تكساس.",
+    "سارت رودستر على منحدر مقلوب بالاعتماد على نظام شفط أسفل السيارة.",
+    "نفّذت السيارة قفزة ودورانًا في الهواء بالدافعات ثم هبطت.",
+    "عُرضت رودستر وهي تتجاوز شاحنة وسيارات أخرى.",
+    "تقول تسلا إن السيارة تتسارع من 0 إلى 60 ميلًا في الساعة في أقل من ثانية.",
+    "تذكر تسلا سرعة قصوى تتجاوز 230 ميلًا في الساعة ومدى يتجاوز 300 ميل للشحنة الواحدة.",
+    "تقول تسلا إن الإنتاج يُتوقع أن يبدأ في 2028.",
+    "أُعيد بناء المنحدر والنفث والحركة في هذه الصفحة من أشكال ثلاثية الأبعاد بسيطة."
+  ],
+  tech: [
+    { t: "نظام الشفط والمنحدر المقلوب", d: "في العرض، يثبّت نظام الشفط أسفل السيارة التصاقها بالمنحدر المقلوب. لم تُنشر أرقام قوة الشفط ولا تفاصيل البنية كاملة." },
+    { t: "الدافعات والقفزة", d: "نفّذت السيارة قفزة ودورانًا في الهواء بالدافعات ثم هبطت. في هذا النموذج، النفث المتجه للأسفل عند زوايا العجلات الأربع مبسّط لإظهار اتجاه قوة الرفع." },
+    { t: "تجاوز شاحنة وسيارات أخرى", d: "عُرضت رودستر وهي تتجاوز شاحنة وسيارات أخرى. على المسرح ثلاثي الأبعاد تعمل هذه المركبات كعلامات لتقدير المسافة." },
+    { t: "التسارع", d: "تقول تسلا إن السيارة تتسارع من 0 إلى 60 ميلًا في الساعة في أقل من ثانية. هذا الرقم غير متحقق منه بشكل مستقل في هذه الصفحة." },
+    { t: "النموذج ثلاثي الأبعاد في هذه الصفحة", d: "السيارة والمنحدر والنفث كلها مبنية من أشكال أساسية في مكتبة الرسوم ثلاثية الأبعاد، وقد بُسّطت الأشكال والحركة لتسهيل المتابعة." },
+    { t: "زمن الحركة", d: "مُدّد زمن كل مرحلة ليتمكن المشاهد من المتابعة. لا تعامل زمن الحركة في هذه الصفحة كنتيجة قياس." }
+  ],
+  specs: [
+    { l: "التسارع", v: "0–60 ميلًا في الساعة في أقل من ثانية" },
+    { l: "السرعة القصوى", v: "أكثر من 230 ميلًا في الساعة" },
+    { l: "المدى", v: "أكثر من 300 ميل للشحنة الواحدة" },
+    { l: "الإنتاج", v: "تقول تسلا إنه يُتوقع أن يبدأ في 2028" }
+  ],
+  hot: [
+    { t: "نظام الشفط السفلي", d: "في العرض، يولّد الجزء السفلي قوة شفط تثبّت السيارة على المنحدر المقلوب. لم تُنشر أرقام قوة الشفط كاملة." },
+    { t: "فوهات الدافعات", d: "استُخدمت الدافعات في القفزة والدوران في الهواء خلال العرض. وهي مناورات قصيرة وليست طيرانًا متواصلًا." },
+    { t: "فوهات الرفع في الزوايا الأربع", d: "في العرض ترتفع السيارة عن الأرض بالدافعات. في هذا النموذج وُضع النفث المتجه للأسفل عند زوايا العجلات الأربع لإظهار اتجاه قوة الرفع، وموضع الفوهات وشكلها مبسّطان." },
+    { t: "العجلات", d: "عجلات رياضية بحواف فاتحة اللون. نسب الإطار والحافة في النموذج مبسّطة لتسهيل الرؤية." },
+    { t: "الهيكل والتصميم الديناميكي", d: "هيكل منخفض وممتد، ومقصورة زجاجية داكنة، وجناح خلفي. تفاصيل الديناميكا الهوائية هنا للتوضيح فقط." }
+  ]
+};
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+"use strict";
+(function () {
+  /* =========================================================================
+     0. DỮ LIỆU NỘI DUNG
+     ========================================================================= */
+  var LANGS = window.LANGS;
+  var I18N = window.I18N;
+  var LANG = "vi";
+  var L = I18N.vi;
+
+  /* Thứ tự tag cố định cho từng khối nội dung (nội dung chữ lấy từ I18N) */
+  var STAGE_META = [
+    { dur: 5.0, tags: ["sim"] },
+    { dur: 7.5, tags: ["event", "sim"] },
+    { dur: 11.0, tags: ["event"] },
+    { dur: 9.0, tags: ["event", "sim"] },
+    { dur: 6.5, tags: ["event", "sim"] },
+    { dur: 8.0, tags: ["claim", "sim"] }
+  ];
+  var FACT_TAGS = ["event", "event", "event", "event", "claim", "claim", "claim", "sim"];
+  var TECH_TAGS = [["event"], ["event"], ["event", "sim"], ["claim"], ["sim"], ["sim"]];
+  var HOT_META = [
+    { id: "fans", local: [0.6, 0.18, 0], tags: ["event"] },
+    { id: "thruster", local: [-2.7, 0.85, 0], tags: ["event"] },
+    { id: "lift", local: [1.55, 0.3, 1.15], tags: ["event", "sim"] },
+    { id: "wheel", local: [1.6, 0.55, 1.15], tags: ["sim"] },
+    { id: "body", local: [-1.4, 1.5, 0], tags: ["sim"] }
+  ];
+  var PIN_POS = [[0.4, 1.0, 1.05], [-0.3, 1.6, 0.8], [0.9, 0.12, 1.0], [-2.5, 1.05, 0.9]];
+  var PIN_KEYS = ["pin.body", "pin.cabin", "pin.under", "pin.rear"];
+  var SPEC_ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0" stroke-linecap="round"/><path d="M12 18l5-6" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="7" width="15" height="10" rx="2"/><path d="M18 11h3v2h-3z" fill="currentColor" stroke="none"/><path d="M6 10v4M9 10v4M12 10v4" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg>'
+  ];
+  var KEY_ROWS = [
+    ["Space", "key.space"], ["1–6", "key.stage"], ["R", "key.reset"],
+    ["E", "key.explore"], ["C", "key.cam"], ["F", "key.full"]
+  ];
+
+  /* =========================================================================
+     1. TIỆN ÍCH CHUNG
+     ========================================================================= */
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var smooth = function (t) { t = clamp01(t); return t * t * (3 - 2 * t); };
+  var easeIn = function (t) { return t * t; };
+  var easeOut = function (t) { return 1 - (1 - t) * (1 - t); };
+  var TAU = Math.PI * 2;
+
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function T(k) {
+    var v = L.t[k];
+    return v === undefined ? (I18N.vi.t[k] === undefined ? k : I18N.vi.t[k]) : v;
+  }
+
+  function tagHTML(key) {
+    return '<span class="tag ' + key + '">' + T("tag." + key) + "</span>";
+  }
+
+  function esc(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  /* =========================================================================
+     2. NỘI DUNG TĨNH (thẻ chặng, dữ kiện, thanh chặng)
+     ========================================================================= */
+  function buildContent() {
+    $("stageCards").innerHTML = L.stages.map(function (s, i) {
+      return '<article class="card">' +
+        '<span class="num">' + esc(T("st.stage").replace("{n}", i + 1)) + "</span>" +
+        "<h3>" + esc(s.n) + "</h3><p>" + esc(s.d) + "</p>" +
+        '<div class="foot">' + STAGE_META[i].tags.map(tagHTML).join("") +
+        '<button class="btn sm ghost" data-goto="' + i + '">' + esc(T("st.view")) + "</button></div></article>";
+    }).join("");
+
+    $("factList").innerHTML = L.facts.map(function (f, i) {
+      return '<div class="fact"><p>' + esc(f) + "</p>" + tagHTML(FACT_TAGS[i]) + "</div>";
+    }).join("");
+
+    $("steps").innerHTML = L.stages.map(function (s, i) {
+      return '<button class="step" data-step="' + i + '" aria-pressed="' + (i === prog.stage) + '">' +
+        "<span>" + esc(T("st.stage").replace("{n}", i + 1)) + "</span><b>" + esc(s.n) + "</b></button>";
+    }).join("");
+
+    $("techCards").innerHTML = L.tech.map(function (c, i) {
+      return '<article class="card"><span class="num">' + ("0" + (i + 1)) + "</span>" +
+        "<h3>" + esc(c.t) + "</h3><p>" + esc(c.d) + "</p>" +
+        '<div class="foot">' + TECH_TAGS[i].map(tagHTML).join("") + "</div></article>";
+    }).join("");
+
+    $("specCards").innerHTML = L.specs.map(function (c, i) {
+      return '<article class="card">' + SPEC_ICONS[i] +
+        '<div class="lbl">' + esc(c.l) + '</div><div class="val">' + esc(c.v) + "</div>" +
+        '<div class="foot">' + tagHTML("claim") + "</div></article>";
+    }).join("");
+
+    $("keyList").innerHTML = KEY_ROWS.map(function (r) {
+      return "<kbd>" + esc(r[0]) + '</kbd><span class="keytxt">' + esc(T(r[1])) + "</span>";
+    }).join("");
+  }
+
+  /* ---------- Đổi ngôn ngữ ---------- */
+  function applyStatic() {
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      el.textContent = T(el.getAttribute("data-i18n"));
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      el.innerHTML = T(el.getAttribute("data-i18n-html"));
+    });
+    $("gaugeCap").textContent = T("hud.gaugeCap");
+    $("scene").setAttribute("aria-label", T("sim.h2"));
+    $("hotClose").setAttribute("aria-label", T("hud.close"));
+    $("fallbackTitle").textContent = T("fb.title");
+    $("fallbackLink").textContent = T("fb.link");
+    $("langBtn").setAttribute("aria-label", "Language / Ngôn ngữ");
+    if (fallbackKey) $("fallbackText").textContent = T(fallbackKey);
+  }
+
+  function applyLang(code, save) {
+    if (!I18N[code]) code = "vi";
+    var meta = null;
+    LANGS.forEach(function (l) { if (l.c === code) meta = l; });
+    LANG = code;
+    L = I18N[code];
+    document.documentElement.lang = code;
+    document.documentElement.dir = (meta && meta.dir) ? meta.dir : "ltr";
+    $("langFlag").textContent = meta ? meta.f : "🇻🇳";
+    $("langCode").textContent = code.toUpperCase();
+    applyStatic();
+    buildContent();
+    pinEls.forEach(function (el, i) {
+      var txt = el.querySelector(".txt");
+      if (txt) txt.textContent = T(PIN_KEYS[i]);
+    });
+    hotEls.forEach(function (b, i) {
+      b.setAttribute("aria-label", L.hot[i].t);
+    });
+    document.querySelectorAll("#langMenu [data-lang]").forEach(function (li) {
+      li.setAttribute("aria-selected", String(li.getAttribute("data-lang") === code));
+    });
+    if (openHotspot) { openHotspot = null; $("hotCard").hidden = true; refreshHotPressed(); }
+    lastStage = -1; lastCd = null;
+    if (save !== false) { try { localStorage.setItem("roadster.lang", code); } catch (e) {} }
+  }
+
+  function detectLang() {
+    var saved = null;
+    try { saved = localStorage.getItem("roadster.lang"); } catch (e) {}
+    if (saved && I18N[saved]) return saved;
+    var navs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "vi"];
+    for (var i = 0; i < navs.length; i++) {
+      var base = String(navs[i]).toLowerCase().split("-")[0];
+      if (base === "zh") return "zh";
+      if (I18N[base]) return base;
+    }
+    return "vi";
+  }
+
+  function buildLangMenu() {
+    var menu = $("langMenu");
+    menu.innerHTML = "";
+    LANGS.forEach(function (l) {
+      var li = document.createElement("li");
+      li.className = "langitem";
+      li.setAttribute("role", "option");
+      li.setAttribute("tabindex", "0");
+      li.setAttribute("data-lang", l.c);
+      li.setAttribute("aria-selected", "false");
+      li.innerHTML = '<span class="flag" aria-hidden="true">' + l.f + "</span><span>" + l.n + "</span>";
+      function pick() { applyLang(l.c, true); closeLangMenu(true); }
+      li.addEventListener("click", pick);
+      li.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); }
+      });
+      menu.appendChild(li);
+    });
+  }
+
+  function openLangMenu() {
+    $("langMenu").hidden = false;
+    $("langBtn").setAttribute("aria-expanded", "true");
+    var sel = $("langMenu").querySelector('[aria-selected="true"]');
+    if (sel) sel.focus();
+  }
+
+  function closeLangMenu(focusBtn) {
+    $("langMenu").hidden = true;
+    $("langBtn").setAttribute("aria-expanded", "false");
+    if (focusBtn) $("langBtn").focus();
+  }
+
+  function bindLang() {
+    buildLangMenu();
+    $("langBtn").addEventListener("click", function (e) {
+      e.stopPropagation();
+      if ($("langMenu").hidden) openLangMenu(); else closeLangMenu(false);
+    });
+    document.addEventListener("click", function (e) {
+      if ($("langMenu").hidden) return;
+      if (!e.target.closest || !e.target.closest(".lang")) closeLangMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !$("langMenu").hidden) closeLangMenu(true);
+    });
+  }
+
+  /* =========================================================================
+     3. TRẠNG THÁI CHƯƠNG TRÌNH
+     ========================================================================= */
+  var prog = {
+    stage: 0,
+    t: 0,
+    playing: false,
+    chain: true,       // true = phát toàn bộ, false = chỉ chặng đang chọn
+    speed: REDUCED ? 0.6 : 1,
+    explore: false,
+    ready: false
+  };
+  var opts = { jet: true, narr: true, shake: !REDUCED, labels: true, slow: false };
+  var fallbackKey = null;
+  var fx = { light: 1, countdown: "", gauge: false, mph: 0, accel: 0, startLights: 0, flash: 0, shake: 0, sweep: -110 };
+  var pinList = [];
+  var openHotspot = null;
+
+  function stageDuration(i) {
+    var d = STAGE_META[i].dur;
+    if (i === 5 && opts.slow) d *= 2.2;
+    return d;
+  }
+
+  /* =========================================================================
+     4. DỰNG SÂN KHẤU 3D
+     ========================================================================= */
+  var LOOP_R = 11, LOOP_X = 0, JUMP_X = 46, LAND_X = 88, APEX = 11.5, START_X = -70;
+  var AXIS_X = null;  /* khởi tạo trong initMath() sau khi có thư viện 3D */
+
+  var renderer, scene, camera, car, carPivot, shadowMesh, fanGroup, suctionGroup, plumeGroup, liftGroup, headL = [], tailL = [],
+      spots = [], flashLight, startBulbs = [], particles, pGeom, pPos, pVel, pLife, pCount;
+  var viewEl, canvasEl;
+
+  function loopPoint(phi) {
+    return {
+      p: new THREE.Vector3(LOOP_X + LOOP_R * Math.sin(phi), LOOP_R - LOOP_R * Math.cos(phi), 0),
+      fwd: new THREE.Vector3(Math.cos(phi), Math.sin(phi), 0),
+      up: new THREE.Vector3(-Math.sin(phi), Math.cos(phi), 0)
+    };
+  }
+
+  function buildRibbon(phiA, phiB, segs, z0, z1, offset) {
+    var pos = [], idx = [], i;
+    for (i = 0; i <= segs; i++) {
+      var phi = phiA + (phiB - phiA) * (i / segs);
+      var o = loopPoint(phi);
+      var p = o.p.clone().addScaledVector(o.up, offset || 0);
+      pos.push(p.x, p.y, z0, p.x, p.y, z1);
+    }
+    for (i = 0; i < segs; i++) {
+      var a = i * 2, b = i * 2 + 1, c = i * 2 + 2, d = i * 2 + 3;
+      idx.push(a, b, c, b, d, c);
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    return g;
+  }
+
+  function taperX(geo, len, frontScale, backScale) {
+    var p = geo.attributes.position, i;
+    for (i = 0; i < p.count; i++) {
+      var t = p.getX(i) / (len / 2);
+      var s = t >= 0 ? 1 + (frontScale - 1) * t : 1 + (backScale - 1) * (-t);
+      p.setY(i, p.getY(i) * s);
+      p.setZ(i, p.getZ(i) * s);
+    }
+    p.needsUpdate = true;
+    geo.computeVertexNormals();
+    return geo;
+  }
+
+  function mat(color, rough, metal, emissive, eInt) {
+    return new THREE.MeshStandardMaterial({
+      color: color, roughness: rough, metalness: metal,
+      emissive: emissive === undefined ? 0x000000 : emissive,
+      emissiveIntensity: eInt === undefined ? 1 : eInt
+    });
+  }
+
+  function makeDot() {
+    var c = document.createElement("canvas");
+    c.width = c.height = 64;
+    var g = c.getContext("2d");
+    var rad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    rad.addColorStop(0, "rgba(190,245,255,1)");
+    rad.addColorStop(0.35, "rgba(90,210,255,0.55)");
+    rad.addColorStop(1, "rgba(50,140,200,0)");
+    g.fillStyle = rad;
+    g.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+
+  function buildCar() {
+    var g = new THREE.Group();
+    var bodyMat = mat(0xdfe5ee, 0.28, 0.85);
+    var darkMat = mat(0x0a0f18, 0.18, 0.9);
+    var trimMat = mat(0x767f8e, 0.4, 0.8);
+
+    var chassis = new THREE.Mesh(taperX(new THREE.BoxGeometry(4.9, 0.46, 1.92, 6, 1, 1), 4.9, 0.74, 0.86), bodyMat);
+    chassis.position.y = 0.62; g.add(chassis);
+
+    var hood = new THREE.Mesh(taperX(new THREE.BoxGeometry(2.0, 0.34, 1.7, 6, 1, 1), 2.0, 0.62, 1.0), bodyMat);
+    hood.position.set(1.45, 0.86, 0); hood.rotation.z = -0.05; g.add(hood);
+
+    var cabin = new THREE.Mesh(taperX(new THREE.BoxGeometry(2.2, 0.62, 1.56, 6, 1, 1), 2.2, 0.72, 0.9), darkMat);
+    cabin.position.set(-0.25, 1.18, 0); g.add(cabin);
+
+    var deck = new THREE.Mesh(taperX(new THREE.BoxGeometry(1.7, 0.4, 1.86, 6, 1, 1), 1.7, 1.0, 0.82), bodyMat);
+    deck.position.set(-1.75, 0.95, 0); g.add(deck);
+
+    var splitter = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.08, 1.84), trimMat);
+    splitter.position.set(2.0, 0.42, 0); g.add(splitter);
+
+    var diff = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.3, 1.7), trimMat);
+    diff.position.set(-2.25, 0.5, 0); g.add(diff);
+
+    var wing = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.07, 2.0), trimMat);
+    wing.position.set(-2.35, 1.3, 0); g.add(wing);
+    [-0.72, 0.72].forEach(function (z) {
+      var sup = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.42, 0.08), trimMat);
+      sup.position.set(-2.3, 1.08, z); g.add(sup);
+    });
+
+    var tireMat = mat(0x14171d, 0.95, 0.05);
+    var rimMat = mat(0xb9c3d2, 0.3, 0.9);
+    [[1.62, 1.02], [1.62, -1.02], [-1.62, 1.02], [-1.62, -1.02]].forEach(function (w) {
+      var tire = new THREE.Mesh(new THREE.CylinderGeometry(0.56, 0.56, 0.44, 22), tireMat);
+      tire.rotation.x = Math.PI / 2; tire.position.set(w[0], 0.56, w[1]); g.add(tire);
+      var rim = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.47, 16), rimMat);
+      rim.rotation.x = Math.PI / 2; rim.position.set(w[0], 0.56, w[1]); g.add(rim);
+    });
+
+    headL = [];
+    [0.62, -0.62].forEach(function (z) {
+      var m = mat(0xf2f6ff, 0.2, 0.3, 0xffffff, 0);
+      var h = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.13, 0.52), m);
+      h.position.set(2.42, 0.78, z); g.add(h); headL.push(m);
+    });
+    tailL = [];
+    var tm = mat(0x3a0b10, 0.3, 0.2, 0xe4202f, 0.6);
+    var tail = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.11, 1.5), tm);
+    tail.position.set(-2.52, 0.95, 0); g.add(tail); tailL.push(tm);
+
+    /* quạt hút dưới gầm */
+    fanGroup = new THREE.Group();
+    var fanMat = new THREE.MeshBasicMaterial({ color: 0x35d6ff, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+    [[1.15, 0.6], [1.15, -0.6], [-1.15, 0.6], [-1.15, -0.6]].forEach(function (f) {
+      var fan = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.06, 18), fanMat);
+      fan.position.set(f[0], 0.3, f[1]); fanGroup.add(fan);
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.035, 6, 20), fanMat);
+      ring.rotation.x = Math.PI / 2; ring.position.set(f[0], 0.3, f[1]); fanGroup.add(ring);
+    });
+    fanGroup.userData.mat = fanMat;
+    g.add(fanGroup);
+
+    /* mũi tên lực hút */
+    suctionGroup = new THREE.Group();
+    var sucMat = new THREE.MeshBasicMaterial({ color: 0x7ce8ff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+    [[1.15, 0.6], [1.15, -0.6], [-1.15, 0.6], [-1.15, -0.6], [0, 0.95], [0, -0.95]].forEach(function (f) {
+      var ar = new THREE.Mesh(new THREE.ConeGeometry(0.17, 0.5, 10), sucMat);
+      ar.rotation.x = Math.PI;
+      ar.position.set(f[0], 0.08, f[1]);
+      suctionGroup.add(ar);
+    });
+    suctionGroup.userData.mat = sucMat;
+    g.add(suctionGroup);
+
+    /* thruster + luồng khí */
+    plumeGroup = new THREE.Group();
+    var plumeMat = new THREE.MeshBasicMaterial({ color: 0x6fe6ff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+    var nozMat = mat(0x3a424f, 0.45, 0.9);
+    [-0.62, 0, 0.62].forEach(function (z) {
+      var noz = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.19, 0.34, 12), nozMat);
+      noz.rotation.z = Math.PI / 2; noz.position.set(-2.52, 0.8, z); g.add(noz);
+      var pl = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.7, 12), plumeMat);
+      pl.rotation.z = Math.PI / 2; pl.position.set(-3.6, 0.8, z);
+      plumeGroup.add(pl);
+    });
+    plumeGroup.userData.mat = plumeMat;
+    g.add(plumeGroup);
+
+    /* đầu phun nâng ở bốn góc bánh xe */
+    liftGroup = new THREE.Group();
+    var liftMat = new THREE.MeshBasicMaterial({ color: 0xcfefff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+    liftGroup.userData.mat = liftMat;
+    [[1.55, 1.02], [1.55, -1.02], [-1.55, 1.02], [-1.55, -1.02]].forEach(function (f) {
+      var noz = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.26, 0.26, 12), nozMat);
+      noz.position.set(f[0], 0.34, f[1]); g.add(noz);
+      var jet = new THREE.Mesh(new THREE.ConeGeometry(0.26, 1.6, 12), liftMat);
+      jet.rotation.x = Math.PI;
+      jet.position.set(f[0], -0.58, f[1]);
+      liftGroup.add(jet);
+      var halo = new THREE.Mesh(new THREE.CircleGeometry(0.75, 18), liftMat);
+      halo.rotation.x = -Math.PI / 2;
+      halo.position.set(f[0], 0.06, f[1]);
+      liftGroup.add(halo);
+    });
+    g.add(liftGroup);
+
+    return g;
+  }
+
+  function buildSimpleCar(color, len) {
+    var g = new THREE.Group();
+    var m = mat(color, 0.55, 0.45);
+    var b = new THREE.Mesh(new THREE.BoxGeometry(len, 0.75, 1.9), m);
+    b.position.y = 0.78; g.add(b);
+    var c = new THREE.Mesh(new THREE.BoxGeometry(len * 0.5, 0.55, 1.65), mat(0x0c1119, 0.3, 0.7));
+    c.position.set(-len * 0.05, 1.4, 0); g.add(c);
+    var tm = mat(0x12151b, 0.95, 0.05);
+    [[len * 0.3, 0.95], [len * 0.3, -0.95], [-len * 0.3, 0.95], [-len * 0.3, -0.95]].forEach(function (w) {
+      var t = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.34, 14), tm);
+      t.rotation.x = Math.PI / 2; t.position.set(w[0], 0.42, w[1]); g.add(t);
+    });
+    return g;
+  }
+
+  function buildTruck() {
+    var g = new THREE.Group();
+    var cab = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.6, 2.6), mat(0xb9c2cf, 0.6, 0.35));
+    cab.position.set(4.2, 1.9, 0); g.add(cab);
+    var box = new THREE.Mesh(new THREE.BoxGeometry(9.5, 3.1, 2.8), mat(0x222a38, 0.75, 0.2));
+    box.position.set(-1.6, 2.4, 0); g.add(box);
+    var stripe = new THREE.Mesh(new THREE.BoxGeometry(9.6, 0.18, 2.84), mat(0x3a0f16, 0.6, 0.2, 0xe4202f, 0.5));
+    stripe.position.set(-1.6, 2.0, 0); g.add(stripe);
+    var tm = mat(0x12151b, 0.95, 0.05);
+    [4.0, -0.4, -2.2, -5.2].forEach(function (x) {
+      [1.3, -1.3].forEach(function (z) {
+        var t = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.4, 14), tm);
+        t.rotation.x = Math.PI / 2; t.position.set(x, 0.62, z); g.add(t);
+      });
+    });
+    return g;
+  }
+
+  function buildScene() {
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x05070e);
+    scene.fog = new THREE.FogExp2(0x05070e, 0.0042);
+
+    camera = new THREE.PerspectiveCamera(48, 16 / 9, 0.5, 2000);
+
+    /* ánh sáng nền */
+    var hemi = new THREE.HemisphereLight(0x8fb6ff, 0x0a0e18, 0.38); scene.add(hemi);
+    var amb = new THREE.AmbientLight(0xffffff, 0.22); scene.add(amb);
+    var dir = new THREE.DirectionalLight(0xdce8ff, 0.5); dir.position.set(-40, 60, 40); scene.add(dir);
+    scene.userData.base = { amb: amb, dir: dir, hemiLight: hemi };
+
+    /* đèn sân khấu */
+    [[-72, 24, 22, -62, 0], [8, 30, -26, 6, 6], [74, 24, 24, 74, 0]].forEach(function (s) {
+      var sp = new THREE.SpotLight(0xffffff, 1.2, 320, 0.42, 0.55, 1.2);
+      sp.position.set(s[0], s[1], s[2]);
+      sp.target.position.set(s[3], s[4], 0);
+      scene.add(sp); scene.add(sp.target);
+      spots.push(sp);
+    });
+
+    flashLight = new THREE.PointLight(0x9fe9ff, 0, 60, 2);
+    flashLight.position.set(LAND_X, 2, 0);
+    scene.add(flashLight);
+
+    /* mặt đất và đường thử */
+    var ground = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), mat(0x080b12, 0.98, 0.02));
+    ground.rotation.x = -Math.PI / 2; scene.add(ground);
+
+    var track = new THREE.Mesh(new THREE.PlaneGeometry(260, 26), mat(0x151b27, 0.88, 0.06));
+    track.rotation.x = -Math.PI / 2; track.position.set(20, 0.015, 0); scene.add(track);
+
+    var dashMat = mat(0x5a657a, 0.7, 0.1);
+    for (var dx = -100; dx <= 136; dx += 9) {
+      var dsh = new THREE.Mesh(new THREE.BoxGeometry(4, 0.02, 0.34), dashMat);
+      dsh.position.set(dx, 0.03, 0); scene.add(dsh);
+    }
+    var edgeMat = mat(0x2a3245, 0.8, 0.1);
+    [13, -13].forEach(function (z) {
+      var e = new THREE.Mesh(new THREE.BoxGeometry(260, 0.06, 0.3), edgeMat);
+      e.position.set(20, 0.03, z); scene.add(e);
+    });
+
+    /* vạch xuất phát và vạch tiếp đất */
+    var startLine = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.03, 26), mat(0xffffff, 0.6, 0.1, 0xffffff, 0.25));
+    startLine.position.set(START_X, 0.04, 0); scene.add(startLine);
+    var landLine = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.03, 26), mat(0x8fe6ff, 0.6, 0.1, 0x35d6ff, 0.5));
+    landLine.position.set(LAND_X, 0.04, 0); scene.add(landLine);
+
+    /* giàn đèn xuất phát */
+    var gMat = mat(0x39414f, 0.6, 0.6);
+    [6.5, -6.5].forEach(function (z) {
+      var post = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 5.2, 10), gMat);
+      post.position.set(START_X, 2.6, z); scene.add(post);
+    });
+    var beam = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 13.4), gMat);
+    beam.position.set(START_X, 5.1, 0); scene.add(beam);
+    startBulbs = [];
+    [-1.5, 0, 1.5].forEach(function (z) {
+      var bm = mat(0x1b1410, 0.5, 0.3, 0xff3b2f, 0);
+      var bulb = new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 10), bm);
+      bulb.position.set(START_X, 4.6, z); scene.add(bulb);
+      startBulbs.push(bm);
+    });
+
+    /* đoạn dốc cong */
+    var rampMat = mat(0x1d2434, 0.65, 0.3);
+    rampMat.side = THREE.DoubleSide;
+    var deck = new THREE.Mesh(buildRibbon(0, TAU, 128, -4.3, 4.3, 0.02), rampMat);
+    scene.add(deck);
+    var glowMat = mat(0x16303f, 0.5, 0.4, 0x35d6ff, 0.55);
+    glowMat.side = THREE.DoubleSide;
+    scene.add(new THREE.Mesh(buildRibbon(0, TAU, 128, -4.75, -4.3, 0.05), glowMat));
+    scene.add(new THREE.Mesh(buildRibbon(0, TAU, 128, 4.3, 4.75, 0.05), glowMat));
+
+    var frameMat = mat(0x39414f, 0.55, 0.7);
+    [-4.95, 4.95].forEach(function (z) {
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(LOOP_R + 0.5, 0.2, 8, 72), frameMat);
+      ring.position.set(LOOP_X, LOOP_R, z); scene.add(ring);
+      [[LOOP_X - LOOP_R - 0.5, LOOP_R], [LOOP_X + LOOP_R + 0.5, LOOP_R]].forEach(function (c) {
+        var col = new THREE.Mesh(new THREE.BoxGeometry(0.45, c[1] * 2, 0.45), frameMat);
+        col.position.set(c[0], c[1], z); scene.add(col);
+      });
+    });
+
+    /* dốc bật nhẹ ở điểm rời mặt đất */
+    var kicker = new THREE.Mesh(new THREE.BoxGeometry(9, 0.5, 12), mat(0x222b3c, 0.7, 0.25));
+    kicker.position.set(JUMP_X - 1.5, 0.3, 0);
+    kicker.rotation.z = -0.085;
+    scene.add(kicker);
+
+    /* vật mốc dưới đường bay */
+    var truck = buildTruck(); truck.position.set(56, 0, 0); scene.add(truck);
+    [[68, 0x9aa6b8], [76, 0x5d6b82], [84, 0x8c94a4]].forEach(function (c, i) {
+      var sc = buildSimpleCar(c[1], 4.4);
+      sc.position.set(c[0], 0, i % 2 === 0 ? 2.4 : -2.4);
+      scene.add(sc);
+    });
+
+    /* đèn đường thử */
+    var poleMat = mat(0x2d3542, 0.6, 0.6);
+    var bulbMat = mat(0xffffff, 0.3, 0.1, 0xffffff, 1.4);
+    [-78, -40, -12, 26, 64, 104].forEach(function (x) {
+      [15.5, -15.5].forEach(function (z) {
+        var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.22, 9, 8), poleMat);
+        pole.position.set(x, 4.5, z); scene.add(pole);
+        var head = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.24, 0.7), poleMat);
+        head.position.set(x, 9.1, z * 0.93); scene.add(head);
+        var bulb = new THREE.Mesh(new THREE.SphereGeometry(0.22, 8, 8), bulbMat);
+        bulb.position.set(x, 8.92, z * 0.93); scene.add(bulb);
+      });
+    });
+
+    /* xe chính */
+    car = buildCar();
+    carPivot = new THREE.Group();
+    carPivot.add(car);
+    scene.add(carPivot);
+
+    shadowMesh = new THREE.Mesh(new THREE.CircleGeometry(2.7, 20),
+      new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.42, depthWrite: false }));
+    shadowMesh.rotation.x = -Math.PI / 2;
+    shadowMesh.position.y = 0.05;
+    scene.add(shadowMesh);
+
+    /* hạt luồng khí */
+    pCount = REDUCED ? 100 : 220;
+    pPos = new Float32Array(pCount * 3);
+    pVel = new Float32Array(pCount * 3);
+    pLife = new Float32Array(pCount);
+    for (var i = 0; i < pCount; i++) { pPos[i * 3 + 1] = -500; pLife[i] = 0; }
+    pGeom = new THREE.BufferGeometry();
+    pGeom.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+    particles = new THREE.Points(pGeom, new THREE.PointsMaterial({
+      size: 0.95, map: makeDot(), transparent: true, opacity: 0.9,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    }));
+    scene.add(particles);
+  }
+
+  /* =========================================================================
+     5. TRẠNG THÁI XE VÀ CÁC CHẶNG
+     ========================================================================= */
+  var carState = { pos: null, quat: null, thrust: 0, fan: 0, lift: 0, head: 0, alt: 0 };
+
+  /* Mọi đối tượng của thư viện 3D được tạo ở đây, sau khi thư viện đã tải xong,
+     để trang vẫn chạy bình thường khi không có WebGL hoặc không tải được Three.js. */
+  function initMath() {
+    AXIS_X = new THREE.Vector3(1, 0, 0);
+    tmpV = new THREE.Vector3();
+    carState.pos = new THREE.Vector3(START_X - 8, 0, 0);
+    carState.quat = new THREE.Quaternion();
+    cam.target = new THREE.Vector3(10, 8, 0);
+    cam.tTarget = new THREE.Vector3(10, 8, 0);
+  }
+
+  function placeGround(x) {
+    carState.pos.set(x, 0, 0);
+    carState.quat.identity();
+  }
+
+  function placeBasis(p, fwd, up, roll) {
+    var f = fwd.clone().normalize();
+    var u = up.clone().normalize();
+    var r = new THREE.Vector3().crossVectors(f, u).normalize();
+    var u2 = new THREE.Vector3().crossVectors(r, f).normalize();
+    var m = new THREE.Matrix4().makeBasis(f, u2, r);
+    carState.quat.setFromRotationMatrix(m);
+    if (roll) carState.quat.multiply(new THREE.Quaternion().setFromAxisAngle(AXIS_X, roll));
+    carState.pos.copy(p);
+  }
+
+  function flight(s) {
+    var x = JUMP_X + (LAND_X - JUMP_X) * s;
+    var y = APEX * Math.sin(Math.PI * s);
+    var dx = LAND_X - JUMP_X;
+    var dy = APEX * Math.PI * Math.cos(Math.PI * s);
+    return {
+      p: new THREE.Vector3(x, y, 0),
+      fwd: new THREE.Vector3(dx, dy, 0),
+      up: new THREE.Vector3(-dy, dx, 0),
+      roll: TAU * smooth(clamp01((s - 0.1) / 0.62))
+    };
+  }
+
+  function resetFx() {
+    fx.light = 1; fx.countdown = ""; fx.gauge = false; fx.mph = 0; fx.accel = 0;
+    fx.startLights = 0; fx.flash = 0; fx.shake = 0; fx.sweep = null;
+    carState.thrust = 0; carState.fan = 0; carState.lift = 0; carState.head = 1;
+  }
+
+  function applyStage(i, t) {
+    t = clamp01(t);
+    resetFx();
+    if (i === 0) {
+      fx.light = t < 0.78 ? 0.16 : 0.16 + ((t - 0.78) / 0.22) * 0.84;
+      fx.countdown = t < 0.18 ? "" : t < 0.4 ? "3" : t < 0.62 ? "2" : t < 0.84 ? "1" : "";
+      fx.sweep = lerp(-150, START_X - 8, smooth(t));
+      carState.head = t > 0.88 ? 1 : 0;
+      placeGround(START_X - 8);
+    } else if (i === 1) {
+      placeGround(lerp(START_X - 8, -34, smooth(t)));
+      carState.head = t > 0.12 ? 1 : 0;
+    } else if (i === 2) {
+      if (t < 0.2) {
+        placeGround(lerp(-34, LOOP_X, easeIn(t / 0.2)));
+      } else if (t < 0.88) {
+        var phi = ((t - 0.2) / 0.68) * TAU;
+        var o = loopPoint(phi);
+        placeBasis(o.p.clone().addScaledVector(o.up, 0.03), o.fwd, o.up, 0);
+      } else {
+        placeGround(lerp(LOOP_X, 18, (t - 0.88) / 0.12));
+      }
+      carState.fan = t > 0.14 && t < 0.94 ? smooth(clamp01((t - 0.14) / 0.08)) : 0;
+    } else if (i === 3) {
+      if (t < 0.3) {
+        placeGround(lerp(18, JUMP_X, easeIn(t / 0.3)));
+        carState.thrust = t > 0.2 ? smooth((t - 0.2) / 0.1) : 0;
+        carState.fan = 0.25;
+        carState.lift = t > 0.22 ? smooth((t - 0.22) / 0.08) : 0;
+      } else {
+        var s = ((t - 0.3) / 0.7) * 0.78;
+        var f = flight(s);
+        placeBasis(f.p, f.fwd, f.up, f.roll);
+        carState.thrust = 1;
+        carState.fan = 0.15;
+        carState.lift = s < 0.5 ? 1 - 0.55 * smooth(s / 0.5) : 0.45 * (1 - smooth((s - 0.5) / 0.5));
+      }
+    } else if (i === 4) {
+      if (t < 0.4) {
+        var s2 = lerp(0.78, 1, t / 0.4);
+        var f2 = flight(s2);
+        placeBasis(f2.p, f2.fwd, f2.up, f2.roll);
+        carState.thrust = 0.85 * (1 - t / 0.4);
+        carState.lift = 0.4 + 0.6 * smooth(t / 0.4);
+      } else {
+        placeGround(LAND_X + 20 * easeOut((t - 0.4) / 0.6));
+        carState.thrust = 0;
+        carState.lift = t < 0.52 ? 1 - (t - 0.4) / 0.12 : 0;
+      }
+      if (t > 0.4 && t < 0.54) {
+        var k = 1 - (t - 0.4) / 0.14;
+        fx.flash = k;
+        fx.shake = opts.shake ? k : 0;
+      }
+    } else if (i === 5) {
+      fx.gauge = true;
+      if (t < 0.16) {
+        placeGround(START_X);
+        fx.startLights = t < 0.06 ? 1 : t < 0.12 ? 2 : 3;
+      } else {
+        var u = (t - 0.16) / 0.84;
+        placeGround(START_X + 106 * (0.15 * u + 0.85 * u * u));
+        fx.startLights = 3;
+        fx.mph = Math.min(230, 234 * Math.pow(u, 0.75));
+        fx.accel = clamp01(fx.mph / 230);
+        carState.thrust = 0.55;
+        carState.fan = 0.3;
+      }
+    }
+    carState.alt = carState.pos.y;
+  }
+
+  function applyExplore() {
+    resetFx();
+    placeGround(10);
+    carState.head = 1;
+    carState.fan = openHotspot === "fans" ? 1 : 0.22;
+    carState.thrust = openHotspot === "thruster" ? 0.7 : 0;
+    carState.lift = (openHotspot === "thruster" || openHotspot === "lift") ? 0.85 : 0;
+    carState.alt = 0;
+  }
+
+  /* =========================================================================
+     6. CAMERA
+     ========================================================================= */
+  var cam = {
+    mode: "wide",
+    theta: 0.85, phi: 1.04, dist: 130,
+    tTheta: 0.85, tPhi: 1.04, tDist: 130,
+    target: null,
+    tTarget: null,
+    spin: 0
+  };
+  var CAM_DEFAULT = { theta: 0.85, phi: 1.04, dist: 130 };
+
+  function stageView(i, t) {
+    var c = carState.pos;
+    if (prog.explore) {
+      return { x: 10, y: 1.4, z: 0, dist: 22, theta: cam.spin, phi: 1.12 };
+    }
+    if (i === 0) return { x: START_X - 8, y: 2.5, z: 0, dist: 54, theta: 0.95, phi: 1.14 };
+    if (i === 1) {
+      var a = smooth(clamp01(t / 0.55));
+      return {
+        x: lerp(0, c.x + 1.5, a), y: lerp(10, 1.4, a), z: 0,
+        dist: lerp(120, 26, a), theta: lerp(0.8, 1.12, a), phi: lerp(1.02, 1.2, a)
+      };
+    }
+    if (i === 2) return { x: c.x * 0.3, y: 10.5, z: 0, dist: 62, theta: 0.4 - 0.5 * smooth(t), phi: 1.16 };
+    if (i === 3) return { x: (c.x + 68) / 2, y: 7, z: 0, dist: 74, theta: 0.16, phi: 1.2 };
+    if (i === 4) return { x: c.x * 0.5 + LAND_X * 0.5, y: 3.5, z: 0, dist: 50, theta: 0.42, phi: 1.18 };
+    return { x: c.x + 6, y: 2.6, z: 0, dist: 48, theta: 0.52, phi: 1.2 };
+  }
+
+  function desiredView() {
+    var c = carState.pos;
+    if (cam.mode === "side") return { x: c.x, y: 5.5, z: 0, dist: 58, theta: 0.015, phi: 1.33 };
+    if (cam.mode === "follow") {
+      return { x: c.x, y: Math.max(1.5, c.y + 1.2), z: 0, dist: 27, theta: 1.0, phi: 1.14 };
+    }
+    if (cam.mode === "free") {
+      return { x: c.x, y: Math.max(1.5, c.y + 1.2), z: 0, dist: cam.dist, theta: cam.theta, phi: cam.phi };
+    }
+    return stageView(prog.stage, prog.t);
+  }
+
+  function shortAngle(a) {
+    while (a > Math.PI) a -= TAU;
+    while (a < -Math.PI) a += TAU;
+    return a;
+  }
+
+  function applyCamera(dt, time) {
+    var v = desiredView();
+    cam.tTarget.set(v.x, v.y, v.z);
+    cam.tDist = v.dist; cam.tTheta = v.theta; cam.tPhi = v.phi;
+
+    var k = 1 - Math.pow(0.0025, Math.min(dt, 0.05));
+    if (cam.mode === "free") {
+      cam.target.lerp(cam.tTarget, k);
+    } else {
+      cam.target.lerp(cam.tTarget, k);
+      cam.theta += shortAngle(cam.tTheta - cam.theta) * k;
+      cam.phi += (cam.tPhi - cam.phi) * k;
+      cam.dist += (cam.tDist - cam.dist) * k;
+    }
+    cam.phi = clamp(cam.phi, 0.14, 1.45);
+    cam.dist = clamp(cam.dist, 14, 260);
+
+    var fit = Math.max(1, 1.45 / Math.max(camera.aspect, 0.4));
+    var d = cam.dist * fit;
+    var sp = Math.sin(cam.phi);
+    var px = cam.target.x + d * sp * Math.sin(cam.theta);
+    var py = cam.target.y + d * Math.cos(cam.phi);
+    var pz = cam.target.z + d * sp * Math.cos(cam.theta);
+
+    var sh = fx.shake * (opts.shake ? 1 : 0);
+    if (sh > 0.001) {
+      px += Math.sin(time * 61) * sh * 0.9;
+      py += Math.sin(time * 77) * sh * 0.7;
+      pz += Math.cos(time * 53) * sh * 0.9;
+    }
+    camera.position.set(px, Math.max(1.2, py), pz);
+    camera.lookAt(cam.target);
+  }
+
+  function setCamMode(m) {
+    cam.mode = m;
+    ["camWide", "camSide", "camFollow", "camFree"].forEach(function (id, i) {
+      var modes = ["wide", "side", "follow", "free"];
+      $(id).setAttribute("aria-pressed", String(modes[i] === m));
+    });
+  }
+
+  function resetCamera() {
+    cam.theta = CAM_DEFAULT.theta; cam.phi = CAM_DEFAULT.phi; cam.dist = CAM_DEFAULT.dist;
+    setCamMode("wide");
+  }
+
+  /* =========================================================================
+     7. ÁP DỤNG TRẠNG THÁI LÊN CẢNH
+     ========================================================================= */
+  var fanMeshes = [];
+  function applyCar(dt, time) {
+    carPivot.position.copy(carState.pos);
+    carPivot.quaternion.copy(carState.quat);
+    carPivot.updateMatrixWorld();
+
+    headL.forEach(function (m) { m.emissiveIntensity = carState.head * 2.6; });
+    tailL.forEach(function (m) { m.emissiveIntensity = 0.5 + carState.head * 1.3; });
+
+    fanGroup.userData.mat.opacity = 0.1 + 0.8 * carState.fan;
+    fanGroup.children.forEach(function (c) { c.rotation.y += dt * (3 + 26 * carState.fan); });
+
+    var pulse = 0.55 + 0.45 * Math.sin(time * 7);
+    suctionGroup.userData.mat.opacity = 0.75 * carState.fan * pulse;
+    suctionGroup.children.forEach(function (c) { c.scale.y = 0.7 + 0.5 * pulse * carState.fan; });
+
+    var jet = opts.jet ? carState.thrust : 0;
+    plumeGroup.userData.mat.opacity = 0.8 * jet;
+    plumeGroup.children.forEach(function (c) {
+      c.scale.set(0.7 + 0.5 * jet, 0.5 + 1.3 * jet, 0.7 + 0.5 * jet);
+      c.position.x = -3.1 - 0.9 * jet;
+    });
+
+    var lift = opts.jet ? carState.lift : 0;
+    liftGroup.userData.mat.opacity = 0.85 * lift;
+    liftGroup.children.forEach(function (c, i) {
+      var flick = 0.88 + 0.12 * Math.sin(time * 19 + i);
+      if (i % 2 === 0) c.scale.set(0.7 + 0.45 * lift, (0.45 + 1.15 * lift) * flick, 0.7 + 0.45 * lift);
+      else c.scale.setScalar((0.5 + 0.9 * lift) * flick);
+    });
+
+    var alt = carState.pos.y;
+    var upDot = new THREE.Vector3(0, 1, 0).applyQuaternion(carState.quat).y;
+    shadowMesh.position.set(carState.pos.x, 0.05, carState.pos.z);
+    shadowMesh.scale.setScalar(1 + alt * 0.06);
+    shadowMesh.material.opacity = Math.max(0, 0.42 * (1 - alt / 9)) * Math.max(0.15, upDot);
+
+    flashLight.intensity = fx.flash * 9;
+
+    var L = scene.userData.base;
+    L.amb.intensity = 0.22 * fx.light;
+    L.dir.intensity = 0.5 * fx.light;
+    if (L.hemiLight) L.hemiLight.intensity = 0.38 * fx.light;
+    spots.forEach(function (s, i) {
+      s.intensity = 1.2 * fx.light;
+      if (i === 0 && fx.sweep !== null && fx.sweep !== undefined) s.target.position.x = fx.sweep;
+      else if (i === 0) s.target.position.x = -62;
+      s.target.updateMatrixWorld();
+    });
+    startBulbs.forEach(function (m, i) {
+      var on = fx.startLights === 3 ? 2 : (i < fx.startLights ? 1 : 0);
+      m.emissive.setHex(on === 2 ? 0x2bd97a : 0xff3b2f);
+      m.emissiveIntensity = on === 0 ? 0.04 : 1.6;
+    });
+
+    updateParticles(dt);
+  }
+
+  var tmpV = null;
+  var LIFT_NOZ = [[1.55, 0.3, 1.02], [1.55, 0.3, -1.02], [-1.55, 0.3, 1.02], [-1.55, 0.3, -1.02]];
+  function updateParticles(dt) {
+    var jet = opts.jet ? carState.thrust : 0;
+    var lift = opts.jet ? carState.lift : 0;
+    var total = jet + lift;
+    particles.material.opacity = total > 0 ? 0.9 : 0;
+    var back = new THREE.Vector3(-1, 0, 0).applyQuaternion(carState.quat);
+    var down = new THREE.Vector3(0, -1, 0).applyQuaternion(carState.quat);
+    var noz = new THREE.Vector3(-2.8, 0.8, 0).applyMatrix4(carPivot.matrixWorld);
+    for (var i = 0; i < pCount; i++) {
+      var i3 = i * 3;
+      pLife[i] -= dt;
+      if (pLife[i] <= 0) {
+        if (total > 0.05 && Math.random() < Math.min(1, total) * 0.6) {
+          var useLift = Math.random() * total < lift;
+          var src, dirv, sp;
+          if (useLift) {
+            var n = LIFT_NOZ[(Math.random() * 4) | 0];
+            src = tmpV.set(n[0], n[1], n[2]).applyMatrix4(carPivot.matrixWorld);
+            dirv = down;
+            sp = 5 + Math.random() * 7;
+            pLife[i] = 0.45 + Math.random() * 0.55;
+          } else {
+            src = noz;
+            dirv = back;
+            sp = 7 + Math.random() * 11;
+            pLife[i] = 0.35 + Math.random() * 0.5;
+          }
+          pPos[i3] = src.x + (Math.random() - 0.5) * 0.5;
+          pPos[i3 + 1] = src.y + (Math.random() - 0.5) * 0.5;
+          pPos[i3 + 2] = src.z + (Math.random() - 0.5) * (useLift ? 0.5 : 1.3);
+          pVel[i3] = dirv.x * sp + (Math.random() - 0.5) * 2.6;
+          pVel[i3 + 1] = dirv.y * sp + (Math.random() - 0.5) * 2.6;
+          pVel[i3 + 2] = dirv.z * sp + (Math.random() - 0.5) * 2.6;
+        } else {
+          pPos[i3 + 1] = -500;
+          continue;
+        }
+      }
+      pPos[i3] += pVel[i3] * dt;
+      pPos[i3 + 1] += pVel[i3 + 1] * dt;
+      pPos[i3 + 2] += pVel[i3 + 2] * dt;
+      if (pPos[i3 + 1] < 0.12) {
+        pPos[i3 + 1] = 0.12;
+        pVel[i3 + 1] = Math.abs(pVel[i3 + 1]) * 0.12;
+        pVel[i3] *= 1.08; pVel[i3 + 2] *= 1.08;
+      }
+      pVel[i3] *= 0.96; pVel[i3 + 1] *= 0.96; pVel[i3 + 2] *= 0.96;
+    }
+    pGeom.attributes.position.needsUpdate = true;
+  }
+
+  /* =========================================================================
+     8. LỚP PHỦ HUD: NHÃN, ĐIỂM NÓNG, ĐỒNG HỒ
+     ========================================================================= */
+  var pinEls = [], hotEls = [];
+
+  function buildOverlay() {
+    var hud = $("hud");
+    PIN_POS.forEach(function (_, i) {
+      var el = document.createElement("div");
+      el.className = "pin";
+      el.innerHTML = '<div class="dot"></div><div class="txt">' + esc(T(PIN_KEYS[i])) + "</div>";
+      el.hidden = true;
+      hud.appendChild(el);
+      pinEls.push(el);
+    });
+    HOT_META.forEach(function (h, i) {
+      var b = document.createElement("button");
+      b.className = "hot";
+      b.type = "button";
+      b.setAttribute("aria-label", L.hot[i].t);
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="ring"></span><span aria-hidden="true">+</span>';
+      b.hidden = true;
+      b.addEventListener("click", function () { toggleHotspot(h.id); });
+      hud.appendChild(b);
+      hotEls.push(b);
+    });
+  }
+
+  function refreshHotPressed() {
+    hotEls.forEach(function (b, i) {
+      b.setAttribute("aria-pressed", String(HOT_META[i].id === openHotspot));
+    });
+  }
+
+  function toggleHotspot(id) {
+    openHotspot = openHotspot === id ? null : id;
+    var idx = -1;
+    HOT_META.forEach(function (x, i) { if (x.id === openHotspot) idx = i; });
+    if (idx >= 0) {
+      $("hotTitle").textContent = L.hot[idx].t;
+      $("hotText").textContent = L.hot[idx].d;
+      $("hotTags").innerHTML = HOT_META[idx].tags.map(tagHTML).join("");
+      $("hotCard").hidden = false;
+    } else {
+      $("hotCard").hidden = true;
+    }
+    refreshHotPressed();
+  }
+
+  function project(v) {
+    var p = v.clone().project(camera);
+    if (p.z > 1) return null;
+    return {
+      x: (p.x * 0.5 + 0.5) * viewEl.clientWidth,
+      y: (-p.y * 0.5 + 0.5) * viewEl.clientHeight,
+      ok: p.x > -1.15 && p.x < 1.15 && p.y > -1.15 && p.y < 1.15
+    };
+  }
+
+  function updateOverlay() {
+    var showPins = !prog.explore && prog.stage === 1 && opts.labels;
+    pinEls.forEach(function (el, i) {
+      if (!showPins) { el.hidden = true; return; }
+      var w = tmpV.set(PIN_POS[i][0], PIN_POS[i][1], PIN_POS[i][2]).applyMatrix4(carPivot.matrixWorld);
+      var s = project(w);
+      if (!s || !s.ok) { el.hidden = true; return; }
+      el.hidden = false;
+      el.style.left = s.x + "px";
+      el.style.top = s.y + "px";
+    });
+
+    hotEls.forEach(function (b, i) {
+      if (!prog.explore) { b.hidden = true; return; }
+      var l = HOT_META[i].local;
+      var w = tmpV.set(l[0], l[1], l[2]).applyMatrix4(carPivot.matrixWorld);
+      var s = project(w);
+      if (!s || !s.ok) { b.hidden = true; return; }
+      b.hidden = false;
+      b.style.left = s.x + "px";
+      b.style.top = s.y + "px";
+    });
+  }
+
+  var lastPct = -1, lastStage = -1, lastCd = null;
+  function updateHUD() {
+    var st = L.stages[prog.stage];
+    if (lastStage !== prog.stage) {
+      lastStage = prog.stage;
+      $("hudStep").textContent = T("hud.step").replace("{n}", String(prog.stage + 1));
+      $("hudName").textContent = st.n;
+      $("narrText").textContent = st.r;
+      $("narrTags").innerHTML = STAGE_META[prog.stage].tags.map(tagHTML).join("");
+      document.querySelectorAll(".step").forEach(function (b, i) {
+        b.setAttribute("aria-pressed", String(i === prog.stage));
+      });
+    }
+    var pct = Math.round(prog.t * 100);
+    if (pct !== lastPct) {
+      lastPct = pct;
+      $("progBar").style.width = pct + "%";
+      $("progPct").textContent = pct + "%";
+    }
+    var cd = prog.explore ? "" : fx.countdown;
+    if (cd !== lastCd) {
+      lastCd = cd;
+      $("countdown").textContent = cd;
+      $("countdown").hidden = cd === "";
+    }
+    $("narr").hidden = !opts.narr || prog.explore;
+    $("hudMode").textContent = T(prog.explore ? "hud.modeExplore" : "hud.modeProgram");
+
+    var showGauge = fx.gauge && !prog.explore;
+    $("gauge").hidden = !showGauge;
+    if (showGauge) {
+      var r = clamp01(fx.mph / 230);
+      $("gaugeNum").textContent = Math.round(fx.mph);
+      $("gaugeArc").setAttribute("stroke-dashoffset", String(207 * (1 - r)));
+      var a = Math.PI * (1 - r);
+      $("gaugeNeedle").setAttribute("x2", String(80 + 60 * Math.cos(a)));
+      $("gaugeNeedle").setAttribute("y2", String(84 - 60 * Math.sin(a)));
+      $("gaugeBar").style.width = (fx.accel * 100) + "%";
+      var bulbs = $("startLights").children;
+      for (var i = 0; i < 3; i++) {
+        bulbs[i].className = fx.startLights === 3 ? "go" : (i < fx.startLights ? "on" : "");
+      }
+    }
+    updateOverlay();
+  }
+
+  /* =========================================================================
+     9. ĐIỀU KHIỂN CHƯƠNG TRÌNH
+     ========================================================================= */
+  function selectStage(i, play, chain) {
+    prog.stage = clamp(i, 0, 5);
+    prog.t = 0;
+    prog.chain = !!chain;
+    prog.playing = !!play;
+    openHotspot = null;
+    $("hotCard").hidden = true;
+    setExplore(false);
+  }
+
+  function advance(dt) {
+    var dur = stageDuration(prog.stage);
+    prog.t += (dt * prog.speed) / dur;
+    if (prog.t >= 1) {
+      if (prog.chain && prog.stage < 5) {
+        prog.stage += 1;
+        prog.t = 0;
+      } else {
+        prog.t = 1;
+        prog.playing = false;
+      }
+    }
+  }
+
+  function setExplore(on) {
+    prog.explore = !!on;
+    if (prog.explore) prog.playing = false;
+    $("btnExplore").setAttribute("aria-pressed", String(prog.explore));
+    $("btnProgram").setAttribute("aria-pressed", String(!prog.explore));
+    if (!prog.explore) {
+      openHotspot = null;
+      $("hotCard").hidden = true;
+    }
+  }
+
+  function resetAll() {
+    setExplore(false);
+    prog.stage = 0; prog.t = 0; prog.playing = false; prog.chain = true;
+    lastStage = -1; lastPct = -1;
+    resetCamera();
+    cam.target.set(START_X - 8, 3, 0);
+    applyStage(0, 0);
+  }
+
+  function setSpeed(v, id) {
+    prog.speed = v;
+    ["spdSlow", "spdNormal", "spdFast"].forEach(function (x) {
+      $(x).setAttribute("aria-pressed", String(x === id));
+    });
+  }
+
+  /* =========================================================================
+     10. ĐIỀU KHIỂN GÓC NHÌN BẰNG CHUỘT / CẢM ỨNG
+     ========================================================================= */
+  function bindPointer() {
+    var pts = {}, lastDist = 0, dragging = false;
+
+    canvasEl.addEventListener("pointerdown", function (e) {
+      canvasEl.setPointerCapture(e.pointerId);
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      dragging = true;
+    });
+    canvasEl.addEventListener("pointermove", function (e) {
+      if (!pts[e.pointerId]) return;
+      var prev = pts[e.pointerId];
+      var dx = e.clientX - prev.x, dy = e.clientY - prev.y;
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var ids = Object.keys(pts);
+      if (ids.length >= 2) {
+        var a = pts[ids[0]], b = pts[ids[1]];
+        var d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (lastDist) {
+          cam.dist = clamp(cam.dist * (lastDist / d), 14, 260);
+          if (cam.mode !== "free") setCamMode("free");
+        }
+        lastDist = d;
+        return;
+      }
+      if (!dragging) return;
+      if (cam.mode !== "free") setCamMode("free");
+      cam.theta -= dx * 0.005;
+      cam.phi = clamp(cam.phi - dy * 0.004, 0.14, 1.45);
+    });
+    function up(e) {
+      delete pts[e.pointerId];
+      if (Object.keys(pts).length < 2) lastDist = 0;
+      if (Object.keys(pts).length === 0) dragging = false;
+    }
+    canvasEl.addEventListener("pointerup", up);
+    canvasEl.addEventListener("pointercancel", up);
+    canvasEl.addEventListener("wheel", function (e) {
+      e.preventDefault();
+      if (cam.mode !== "free") setCamMode("free");
+      cam.dist = clamp(cam.dist * Math.exp(e.deltaY * 0.0012), 14, 260);
+    }, { passive: false });
+  }
+
+  /* =========================================================================
+     11. GẮN SỰ KIỆN GIAO DIỆN
+     ========================================================================= */
+  function toggleFullscreen() {
+    var el = $("stageShell");
+    if (!document.fullscreenElement) {
+      if (el.requestFullscreen) el.requestFullscreen().catch(function () {});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(function () {});
+    }
+  }
+
+  function bindUI(has3D) {
+    $("btnFull").addEventListener("click", toggleFullscreen);
+    $("btnFullTop").addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", function () {
+      var on = !!document.fullscreenElement;
+      $("btnFull").setAttribute("aria-pressed", String(on));
+      $("btnFullTop").setAttribute("aria-pressed", String(on));
+      if (has3D) resize();
+    });
+
+    $("tglJet").addEventListener("change", function (e) { opts.jet = e.target.checked; });
+    $("tglNarr").addEventListener("change", function (e) { opts.narr = e.target.checked; });
+    $("tglShake").addEventListener("change", function (e) { opts.shake = e.target.checked; });
+    $("tglLabels").addEventListener("change", function (e) { opts.labels = e.target.checked; });
+    $("tglSlow").addEventListener("change", function (e) { opts.slow = e.target.checked; });
+    $("tglShake").checked = opts.shake;
+
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("[data-goto]") : null;
+      if (!b) return;
+      selectStage(parseInt(b.getAttribute("data-goto"), 10), has3D, false);
+      document.getElementById("mo-phong").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+    });
+
+    $("steps").addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("[data-step]") : null;
+      if (!b) return;
+      selectStage(parseInt(b.getAttribute("data-step"), 10), has3D, false);
+    });
+
+    $("btnStartSim").addEventListener("click", function () {
+      document.getElementById("mo-phong").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+      if (has3D) { selectStage(0, true, true); }
+    });
+
+    if (!has3D) {
+      ["btnPlayAll", "btnPause", "btnResume", "btnReplay", "btnReset", "btnExplore", "btnProgram",
+       "btnReplayHop", "btnRunLaunch", "camWide", "camSide", "camFollow", "camFree", "camReset",
+       "spdSlow", "spdNormal", "spdFast"].forEach(function (id) {
+        var el = $(id); if (el) el.disabled = true;
+      });
+      return;
+    }
+
+    $("btnPlayAll").addEventListener("click", function () { selectStage(0, true, true); });
+    $("btnPause").addEventListener("click", function () { prog.playing = false; });
+    $("btnResume").addEventListener("click", function () {
+      if (prog.explore) setExplore(false);
+      if (prog.t >= 1) prog.t = 0;
+      prog.playing = true;
+    });
+    $("btnReplay").addEventListener("click", function () { selectStage(prog.stage, true, false); });
+    $("btnReset").addEventListener("click", resetAll);
+    $("btnReplayHop").addEventListener("click", function () { selectStage(3, true, false); });
+    $("btnRunLaunch").addEventListener("click", function () { selectStage(5, true, false); });
+    $("btnExplore").addEventListener("click", function () { setExplore(true); });
+    $("btnProgram").addEventListener("click", function () { setExplore(false); });
+    $("hotClose").addEventListener("click", function () { toggleHotspot(openHotspot); });
+
+    $("spdSlow").addEventListener("click", function () { setSpeed(0.6, "spdSlow"); });
+    $("spdNormal").addEventListener("click", function () { setSpeed(1, "spdNormal"); });
+    $("spdFast").addEventListener("click", function () { setSpeed(1.7, "spdFast"); });
+
+    $("camWide").addEventListener("click", function () { setCamMode("wide"); });
+    $("camSide").addEventListener("click", function () { setCamMode("side"); });
+    $("camFollow").addEventListener("click", function () { setCamMode("follow"); });
+    $("camFree").addEventListener("click", function () { setCamMode("free"); });
+    $("camReset").addEventListener("click", resetCamera);
+
+    document.addEventListener("keydown", function (e) {
+      var tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.target && e.target.closest && e.target.closest(".lang")) return;
+      var k = (e.key || "").toLowerCase();
+      if (e.key === " ") {
+        e.preventDefault();
+        if (prog.explore) setExplore(false);
+        if (prog.playing) prog.playing = false;
+        else { if (prog.t >= 1) prog.t = 0; prog.playing = true; }
+      } else if (k >= "1" && k <= "6") {
+        selectStage(parseInt(k, 10) - 1, true, false);
+      } else if (k === "r") { resetAll(); }
+      else if (k === "e") { setExplore(!prog.explore); }
+      else if (k === "c") { resetCamera(); }
+      else if (k === "f") { toggleFullscreen(); }
+      else if (k === "n") { opts.narr = !opts.narr; $("tglNarr").checked = opts.narr; }
+      else if (k === "j") { opts.jet = !opts.jet; $("tglJet").checked = opts.jet; }
+    });
+  }
+
+  /* =========================================================================
+     12. VÒNG LẶP VÀ KHỞI TẠO
+     ========================================================================= */
+  var visible = true;
+  function resize() {
+    var w = viewEl.clientWidth, h = viewEl.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+
+  function start3D() {
+    initMath();
+    renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: !REDUCED, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    if (renderer.outputEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
+    buildScene();
+    buildContent();
+    buildOverlay();
+    resize();
+    bindPointer();
+    prog.ready = true;
+
+    if (window.ResizeObserver) {
+      new ResizeObserver(resize).observe(viewEl);
+    }
+    window.addEventListener("resize", resize);
+
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+      }, { threshold: 0.02 }).observe(viewEl);
+    }
+
+    resetAll();
+
+    var clock = new THREE.Clock();
+    (function frame() {
+      requestAnimationFrame(frame);
+      var dt = Math.min(0.05, clock.getDelta());
+      var time = clock.elapsedTime;
+      if (prog.explore) {
+        if (!REDUCED && cam.mode === "wide") cam.spin += dt * 0.12;
+        applyExplore();
+      } else {
+        if (prog.playing) advance(dt);
+        applyStage(prog.stage, prog.t);
+      }
+      applyCar(dt, time);
+      applyCamera(dt, time);
+      updateHUD();
+      if (visible) renderer.render(scene, camera);
+    })();
+  }
+
+  function showFallback(key) {
+    fallbackKey = key;
+    $("fallback").hidden = false;
+    $("fallbackText").textContent = T(key);
+    $("hud").hidden = true;
+  }
+
+  function hasWebGL() {
+    try {
+      var c = document.createElement("canvas");
+      return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
+    } catch (err) { return false; }
+  }
+
+  function boot() {
+    viewEl = $("stageView");
+    canvasEl = $("scene");
+    bindLang();
+
+    var ok = !!window.THREE && hasWebGL();
+    if (ok) {
+      try {
+        start3D();
+      } catch (err) {
+        ok = false;
+        showFallback("fb.init");
+      }
+    } else if (!window.THREE) {
+      showFallback("fb.lib");
+    } else {
+      showFallback("fb.webgl");
+    }
+    applyLang(detectLang(), false);
+    bindUI(ok && prog.ready);
+    if (REDUCED) setSpeed(0.6, "spdSlow");
+  }
+
+  function loadFallbackLib(done) {
+    var called = false;
+    function fire() { if (!called) { called = true; done(); } }
+    var s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js";
+    s.onload = fire;
+    s.onerror = fire;
+    document.head.appendChild(s);
+    setTimeout(fire, 6000);
+  }
+
+  if (window.THREE) {
+    boot();
+  } else {
+    loadFallbackLib(boot);
+  }
+})();
+</script>
+<!--ARTIFACT_END-->
+</body>
+</html>
